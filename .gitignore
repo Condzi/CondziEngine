@@ -301,3 +301,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+CondziEngine.sln
+CondziEngine.vcxproj
+*.dll
+CondziEngine.vcxproj.filters
