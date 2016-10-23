@@ -1,7 +1,7 @@
 #pragma once
 #include <map>
 #include "Managing/State.hpp"
-#include "ErrorCodes.hpp"
+#include "Debug/Debug.hpp"
 
 namespace ce
 {
@@ -10,9 +10,9 @@ namespace ce
 	public:
 		StateManager(unsigned short stateToStart = 1);
 
-		void AddSate(unsigned short id, State * state, ErrorCode::StateManager * errCode = nullptr);
+		void AddSate(unsigned short id, State * state);
 
-		void Run(ErrorCode::StateManager * errCode = nullptr);
+		void Run();
 
 	private:
 		unsigned short m_currentState;

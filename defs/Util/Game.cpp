@@ -8,7 +8,6 @@ ce::Game::Game()
 
 void ce::Game::Run()
 {
-	ErrorCode::StateManager err;
-
-	m_stateManager.Run(&err);
+	m_stateManager.Run();
+	m_window.close();
 }
