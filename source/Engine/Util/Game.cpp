@@ -1,4 +1,4 @@
-#include "Util/Game.hpp"
+#include "Engine/Util/Game.hpp"
 
 ce::Game::Game()
 {
@@ -6,8 +6,12 @@ ce::Game::Game()
 	m_window.setFramerateLimit(48);
 }
 
+
 void ce::Game::Run()
 {
-	m_stateManager.Run();
+	PlayState ps(m_window, "resources/playState.config");
+	m_stateMachine.AddSate(1, &ps);
+	
+	m_stateMachine.Run();
 	m_window.close();
 }

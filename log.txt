@@ -1,1 +1,6 @@
-0: StateManager: Cannot run, no states!
+0: ResourceCache: Cannot -get (find)- texture Paddle!
+1: ResourceCache: Cannot -get (find)- texture Paddle!
+2: ResourceCache: Cannot -get (find)- texture Ball!
+3: ResourceCache: Cannot -get (find)- sound bufer BallHit!
+4: ResourceCache: Cannot -get (find)- sound bufer Score!
+5: StateMachine: Cannot switch states, switching to 0!

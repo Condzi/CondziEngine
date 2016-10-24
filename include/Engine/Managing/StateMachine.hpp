@@ -1,14 +1,15 @@
 #pragma once
 #include <map>
-#include "Managing/State.hpp"
-#include "Debug/Debug.hpp"
+#include "Engine/Managing/State.hpp"
+#include "Engine/Debug/Debug.hpp"
 
 namespace ce
 {
-	class StateManager
+	// First (1) state should be Menu
+	class StateMachine
 	{
 	public:
-		StateManager(unsigned short stateToStart = 1);
+		StateMachine(unsigned short stateToStart = 1);
 
 		void AddSate(unsigned short id, State * state);
 

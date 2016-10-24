@@ -3,16 +3,15 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
-#include "Debug/Debug.hpp"
-#include "ConfigFileReader/ConfigFile.hpp"
+#include "Engine/Debug/Debug.hpp"
+#include "Engine/ConfigFileReader/ConfigFile.hpp"
 
 namespace ce
 {
-	// Managing:
 	// - Textures
 	// - Fonts
 	// - SoundBuffers
-	class ResourceManager
+	class ResourceCache
 	{
 	private:
 		void loadTextures(std::string & configFilePath);
@@ -21,7 +20,7 @@ namespace ce
 
 	public:
 		// configFilePath - path to cfg file with paths to textures, fonts and sound buffers
-		ResourceManager(const std::string & configFilePath);
+		ResourceCache(const std::string & configFilePath);
 
 		const sf::Texture & GetTexture(const std::string & key);
 		const sf::Font & GetFont(const std::string & key);

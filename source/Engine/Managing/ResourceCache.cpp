@@ -1,6 +1,6 @@
-#include "Managing/ResourceManager.hpp"
+#include "Engine/Managing/ResourceCache.hpp"
 
-void ce::ResourceManager::loadTextures(std::string & configFilePath)
+void ce::ResourceCache::loadTextures(std::string & configFilePath)
 {
 	ConfigFile cfg;
 	bool logErrors = false;
@@ -16,13 +16,13 @@ void ce::ResourceManager::loadTextures(std::string & configFilePath)
 	if (!cfg.LoadFromFile(configFilePath, false) &&
 		logErrors)
 	{
-		Logger::LogToFile("ResourceManager: Cannot -open- .config file with -textures- paths!");
+		Logger::LogToFile("ResourceCache: Cannot -open- .config file with -textures- paths!");
 	}
 
 	if (!cfg.Parse() &&
 		logErrors)
 	{
-		Logger::LogToFile("ResourceManager: Cannot -parse- .config file with -textures- paths!");
+		Logger::LogToFile("ResourceCache: Cannot -parse- .config file with -textures- paths!");
 	}
 
 	for (unsigned short counter = 0; counter < cfg.GetAmountOfData(); ++counter)
@@ -34,7 +34,7 @@ void ce::ResourceManager::loadTextures(std::string & configFilePath)
 		if (!temporaryTexture.loadFromFile(cfg.GetData(counter)) &&
 			logErrors)
 		{
-			Logger::LogToFile("ResourceManager: " + tempName + " - " + cfg.GetData(counter) + " - cannot -load texture-!");
+			Logger::LogToFile("ResourceCache: " + tempName + " - " + cfg.GetData(counter) + " - cannot -load texture-!");
 		}
 
 		tempTextures[tempName] = temporaryTexture;
@@ -43,7 +43,7 @@ void ce::ResourceManager::loadTextures(std::string & configFilePath)
 	m_textures = tempTextures;
 }
 
-void ce::ResourceManager::loadFonts(std::string & configFilePath)
+void ce::ResourceCache::loadFonts(std::string & configFilePath)
 {
 	ConfigFile cfg;
 	bool logErrors = false;
@@ -59,13 +59,13 @@ void ce::ResourceManager::loadFonts(std::string & configFilePath)
 	if (!cfg.LoadFromFile(configFilePath, false) &&
 		logErrors)
 	{
-		Logger::LogToFile("ResourceManager: Cannot -open- .config file with -fonts- paths!");
+		Logger::LogToFile("ResourceCache: Cannot -open- .config file with -fonts- paths!");
 	}
 
 	if (!cfg.Parse() &&
 		logErrors)
 	{
-		Logger::LogToFile("ResourceManager: Cannot -parse- .config file with -fonts- paths!");
+		Logger::LogToFile("ResourceCache: Cannot -parse- .config file with -fonts- paths!");
 	}
 
 	for (unsigned short counter = 0; counter < cfg.GetAmountOfData(); ++counter)
@@ -77,7 +77,7 @@ void ce::ResourceManager::loadFonts(std::string & configFilePath)
 		if (!temporaryFont.loadFromFile(cfg.GetData(counter)) &&
 			logErrors)
 		{
-			Logger::LogToFile("ResourceManager: " + tempName + " - " + cfg.GetData(counter) + " - cannot -load font-!");
+			Logger::LogToFile("ResourceCache: " + tempName + " - " + cfg.GetData(counter) + " - cannot -load font-!");
 		}
 
 		tempFonts[tempName] = temporaryFont;
@@ -86,7 +86,7 @@ void ce::ResourceManager::loadFonts(std::string & configFilePath)
 	m_fonts = tempFonts;
 }
 
-void ce::ResourceManager::loadSoundBuffers(std::string & configFilePath)
+void ce::ResourceCache::loadSoundBuffers(std::string & configFilePath)
 {
 	ConfigFile cfg;
 	bool logErrors = false;
@@ -102,13 +102,13 @@ void ce::ResourceManager::loadSoundBuffers(std::string & configFilePath)
 	if (!cfg.LoadFromFile(configFilePath, false) &&
 		logErrors)
 	{
-		Logger::LogToFile("ResourceManager: Cannot -open- .config file with -sounds- paths!");
+		Logger::LogToFile("ResourceCache: Cannot -open- .config file with -sounds- paths!");
 	}
 
 	if (!cfg.Parse() &&
 		logErrors)
 	{
-		Logger::LogToFile("ResourceManager: Cannot -parse- .config file with -sounds- paths!");
+		Logger::LogToFile("ResourceCache: Cannot -parse- .config file with -sounds- paths!");
 	}
 
 	for (unsigned short counter = 0; counter < cfg.GetAmountOfData(); ++counter)
@@ -120,7 +120,7 @@ void ce::ResourceManager::loadSoundBuffers(std::string & configFilePath)
 		if (!temporarySoundBuffer.loadFromFile(cfg.GetData(counter)) &&
 			logErrors)
 		{
-			Logger::LogToFile("ResourceManager: " + tempName + " - " + cfg.GetData(counter) + " - cannot -load sound-!");
+			Logger::LogToFile("ResourceCache: " + tempName + " - " + cfg.GetData(counter) + " - cannot -load sound-!");
 		}
 
 		tempSoundBuffers[tempName] = temporarySoundBuffer;
@@ -129,7 +129,7 @@ void ce::ResourceManager::loadSoundBuffers(std::string & configFilePath)
 	m_soundBuffers = tempSoundBuffers;
 }
 
-ce::ResourceManager::ResourceManager(const std::string & configFilePath)
+ce::ResourceCache::ResourceCache(const std::string & configFilePath)
 {
 	ConfigFile cfg;
 	bool logErrors = false;
@@ -141,13 +141,13 @@ ce::ResourceManager::ResourceManager(const std::string & configFilePath)
 	if (!cfg.LoadFromFile(configFilePath, false) &&
 		logErrors)
 	{
-		Logger::LogToFile("ResourceManager: Cannot -open- .config file with -resources config- paths!");
+		Logger::LogToFile("ResourceCache: Cannot -open- .config file with -resources config- paths!");
 	}
 
 	if (!cfg.Parse() &&
 		logErrors)
 	{
-		Logger::LogToFile("ResourceManager: Cannot -parse- .config file with -resources config- paths!");
+		Logger::LogToFile("ResourceCache: Cannot -parse- .config file with -resources config- paths!");
 	}
 
 	loadTextures(cfg.GetData("TEXTURES"));
@@ -155,7 +155,7 @@ ce::ResourceManager::ResourceManager(const std::string & configFilePath)
 	loadSoundBuffers(cfg.GetData("SOUNDBUFFERS"));
 }
 
-const sf::Texture & ce::ResourceManager::GetTexture(const std::string & key)
+const sf::Texture & ce::ResourceCache::GetTexture(const std::string & key)
 {
 	for (auto it = m_textures.begin(); it != m_textures.end(); ++it)
 	{
@@ -165,11 +165,11 @@ const sf::Texture & ce::ResourceManager::GetTexture(const std::string & key)
 		}
 	}
 
-	Logger::LogToFile("ResourceManager: Cannot -get (find)- texture " + key + "!");
+	Logger::LogToFile("ResourceCache: Cannot -get (find)- texture " + key + "!");
 	return m_templateTexture;
 }
 
-const sf::Font & ce::ResourceManager::GetFont(const std::string & key)
+const sf::Font & ce::ResourceCache::GetFont(const std::string & key)
 {
 	for (auto it = m_fonts.begin(); it != m_fonts.end(); ++it)
 	{
@@ -179,11 +179,11 @@ const sf::Font & ce::ResourceManager::GetFont(const std::string & key)
 		}
 	}
 
-	Logger::LogToFile("ResourceManager: Cannot -get (find)- font " + key + "!");
+	Logger::LogToFile("ResourceCache: Cannot -get (find)- font " + key + "!");
 	return m_templateFont;
 }
 
-const sf::SoundBuffer & ce::ResourceManager::GetSoundBuffer(const std::string & key)
+const sf::SoundBuffer & ce::ResourceCache::GetSoundBuffer(const std::string & key)
 {
 	for (auto it = m_soundBuffers.begin(); it != m_soundBuffers.end(); ++it)
 	{
@@ -193,6 +193,6 @@ const sf::SoundBuffer & ce::ResourceManager::GetSoundBuffer(const std::string & 
 		}
 	}
 
-	Logger::LogToFile("ResourceManager: Cannot -get (find)- sound bufer " + key + "!");
+	Logger::LogToFile("ResourceCache: Cannot -get (find)- sound bufer " + key + "!");
 	return m_templateSoundBuffer;
 }
