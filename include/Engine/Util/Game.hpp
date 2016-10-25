@@ -11,6 +11,7 @@ namespace ce
 	{
 	public:
 		Game();
+
 		void AddState(unsigned short id, State * state);
 		void Run();
 
