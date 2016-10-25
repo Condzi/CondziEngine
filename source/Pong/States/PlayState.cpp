@@ -2,7 +2,7 @@
 
 void PlayState::randBallVelocityVector()
 {
-	m_ballVelocityVector.x = std::rand() % -10 + 10;
+	m_ballVelocityVector.x = std::rand() % -50 + 50;
 	m_ballVelocityVector.y = std::rand() % -25 + 25;
 }
 
@@ -29,10 +29,8 @@ void PlayState::resetPositions()
 	m_textCounterB.setPosition(m_window->getSize().x / 2 + m_textCounterB.getGlobalBounds().width, m_textCounterB.getGlobalBounds().height);
 }
 
-bool PlayState::handleEvents(const sf::Event & event, float & deltaTime)
+bool PlayState::handleEvents(const sf::Event & event)
 {
-	float movementOffset = 250 * deltaTime;
-
 	if (event.type == sf::Event::Closed ||
 		(event.type == sf::Event::KeyReleased &&
 		event.key.code == sf::Keyboard::Key::Escape))
@@ -40,6 +38,12 @@ bool PlayState::handleEvents(const sf::Event & event, float & deltaTime)
 		return false;
 	}
 
+	return true;
+}
+
+void PlayState::handleRealTimeEvents(float & deltaTime)
+{
+	float movementOffset = 250.f * deltaTime;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
@@ -61,8 +65,12 @@ bool PlayState::handleEvents(const sf::Event & event, float & deltaTime)
 	{
 		m_paddleB.move(0, movementOffset);
 	}
+}
 
-	return true;
+void PlayState::update(float & deltaTime)
+{
+	m_ball.move(m_ballVelocityVector * deltaTime);
+	m_ballVelocityVector.x *= 1.0005f;
 }
 
 void PlayState::draw()
@@ -77,6 +85,30 @@ void PlayState::draw()
 	m_window->draw(m_textCounterB);
 
 	m_window->display();
+}
+
+void PlayState::handleCollisions()
+{
+	if (m_ball.getPosition().x <= 0)
+	{
+		m_soundScore.play();
+		++m_counterB;
+		m_textCounterB.setString(std::to_string(m_counterB));
+		resetPositions();
+		randBallVelocityVector();
+		
+		return;
+	}
+	else if (m_ball.getPosition().x + m_ball.getGlobalBounds().width >= m_window->getSize().x)
+	{
+		m_soundScore.play();
+		++m_counterA;
+		m_textCounterA.setString(std::to_string(m_counterA));
+		resetPositions();
+		randBallVelocityVector();
+
+		return;
+	}
 }
 
 PlayState::PlayState(sf::RenderWindow & window, const std::string & reosurceCacheConfig) : State(window, reosurceCacheConfig)
@@ -97,6 +129,7 @@ PlayState::PlayState(sf::RenderWindow & window, const std::string & reosurceCach
 
 	setResources();
 	resetPositions();
+	randBallVelocityVector();
 }
 
 short PlayState::Run()
@@ -110,9 +143,12 @@ short PlayState::Run()
 	{
 		while (m_window->pollEvent(ev))
 		{
-			play = handleEvents(ev, deltaTime);
+			play = handleEvents(ev);
 		}
 
+		handleRealTimeEvents(deltaTime);
+		update(deltaTime);
+		handleCollisions();
 		draw();
 
 		deltaTime = fpsClock.restart().asSeconds();

@@ -68,6 +68,9 @@ std::string ConfigFile::GetData(const unsigned short & val)
 			return m_data[it->first];
 		}
 
+		m_data[it->first];
+		m_data[it->second];
+
 		++counter;
 	}
 

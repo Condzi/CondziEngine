@@ -15,8 +15,12 @@ private:
 	void setResources();
 	void resetPositions();
 	// returns false if exit
-	bool handleEvents(const sf::Event & event, float & deltaTime);
+	bool handleEvents(const sf::Event & event);
+	void handleRealTimeEvents(float & deltaTime);
+	void update(float & deltaTime);
 	void draw();
+
+	void handleCollisions();
 
 public:
 	PlayState(sf::RenderWindow & window, const std::string & reosurceCacheConfig);

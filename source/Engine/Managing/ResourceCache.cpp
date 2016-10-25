@@ -27,14 +27,12 @@ void ce::ResourceCache::loadTextures(std::string & configFilePath)
 
 	for (unsigned short counter = 0; counter < cfg.GetAmountOfData(); ++counter)
 	{
-		tempName = cfg.GetData(counter);
+		tempName = cfg.GetData("name" + std::to_string(counter));
 
-		++counter;
-
-		if (!temporaryTexture.loadFromFile(cfg.GetData(counter)) &&
+		if (!temporaryTexture.loadFromFile(cfg.GetData("path" + std::to_string(counter))) &&
 			logErrors)
 		{
-			Logger::LogToFile("ResourceCache: " + tempName + " - " + cfg.GetData(counter) + " - cannot -load texture-!");
+			Logger::LogToFile("ResourceCache: " + tempName + " - " + cfg.GetData("path" + std::to_string(counter)) + " - cannot -load texture-!");
 		}
 
 		tempTextures[tempName] = temporaryTexture;
@@ -70,14 +68,12 @@ void ce::ResourceCache::loadFonts(std::string & configFilePath)
 
 	for (unsigned short counter = 0; counter < cfg.GetAmountOfData(); ++counter)
 	{
-		tempName = cfg.GetData(counter);
+		tempName = cfg.GetData("name" + std::to_string(counter));
 
-		++counter;
-
-		if (!temporaryFont.loadFromFile(cfg.GetData(counter)) &&
+		if (!temporaryFont.loadFromFile(cfg.GetData("path" + std::to_string(counter))) &&
 			logErrors)
 		{
-			Logger::LogToFile("ResourceCache: " + tempName + " - " + cfg.GetData(counter) + " - cannot -load font-!");
+			Logger::LogToFile("ResourceCache: " + tempName + " - " + cfg.GetData("path" + std::to_string(counter)) + " - cannot -load font-!");
 		}
 
 		tempFonts[tempName] = temporaryFont;
@@ -113,14 +109,12 @@ void ce::ResourceCache::loadSoundBuffers(std::string & configFilePath)
 
 	for (unsigned short counter = 0; counter < cfg.GetAmountOfData(); ++counter)
 	{
-		tempName = cfg.GetData(counter);
+		tempName = cfg.GetData("name" + std::to_string(counter));
 
-		++counter;
-
-		if (!temporarySoundBuffer.loadFromFile(cfg.GetData(counter)) &&
+		if (!temporarySoundBuffer.loadFromFile(cfg.GetData("path" + std::to_string(counter))) &&
 			logErrors)
 		{
-			Logger::LogToFile("ResourceCache: " + tempName + " - " + cfg.GetData(counter) + " - cannot -load sound-!");
+			Logger::LogToFile("ResourceCache: " + tempName + " - " + cfg.GetData("path" + std::to_string(counter)) + " - cannot -load sound-!");
 		}
 
 		tempSoundBuffers[tempName] = temporarySoundBuffer;
@@ -193,6 +187,6 @@ const sf::SoundBuffer & ce::ResourceCache::GetSoundBuffer(const std::string & ke
 		}
 	}
 
-	Logger::LogToFile("ResourceCache: Cannot -get (find)- sound bufer " + key + "!");
+	Logger::LogToFile("ResourceCache: Cannot -get (find)- sound buffer " + key + "!");
 	return m_templateSoundBuffer;
 }

@@ -6,7 +6,7 @@ int main()
 {
 	try
 	{
-		sf::err().rdbuf(0);
+		//sf::err().rdbuf(0);
 
 		ce::Game game;
 		

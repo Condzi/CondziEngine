@@ -1,6 +1,6 @@
-0: ResourceCache: Cannot -get (find)- texture Paddle!
-1: ResourceCache: Cannot -get (find)- texture Paddle!
-2: ResourceCache: Cannot -get (find)- texture Ball!
-3: ResourceCache: Cannot -get (find)- sound bufer BallHit!
-4: ResourceCache: Cannot -get (find)- sound bufer Score!
+0: ResourceCache: @none - @none - cannot -load texture-!
+1: ResourceCache: @none - @none - cannot -load texture-!
+2: ResourceCache: @none - @none - cannot -load font-!
+3: ResourceCache: @none - @none - cannot -load sound-!
+4: ResourceCache: @none - @none - cannot -load sound-!
 5: StateMachine: Cannot switch states, switching to 0!
