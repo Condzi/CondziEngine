@@ -1,7 +1,7 @@
 #pragma once
 #include <map>
 #include "Engine/Managing/State.hpp"
-#include "Engine/Debug/Debug.hpp"
+#include "Engine/Logger/Logger.hpp"
 
 namespace ce
 {

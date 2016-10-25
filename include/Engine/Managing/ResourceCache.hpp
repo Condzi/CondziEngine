@@ -3,7 +3,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
-#include "Engine/Debug/Debug.hpp"
+#include "Engine/Logger/Logger.hpp"
 #include "Engine/ConfigFileReader/ConfigFile.hpp"
 
 namespace ce

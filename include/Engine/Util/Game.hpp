@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Engine/Managing/StateMachine.hpp"
 #include "Pong/States/PlayState.hpp"
-#include "Engine/Debug/Debug.hpp"
+#include "Engine/Logger/Logger.hpp"
 
 namespace ce
 {
