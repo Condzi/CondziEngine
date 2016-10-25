@@ -27,17 +27,14 @@ public:
 	// Returns data from given key
 	// Returns "@none" if cannot find
 	std::string GetData(const std::string & key);
-	// Returns data from given value
-	// Returns "@none" if cannot find
-	std::string GetData(const unsigned short & val);
 	// Return amount of all data stored
 	unsigned short GetAmountOfData();
 
 	// Sets section name 
 	void SetName(const std::string & name);
 	// Adds data to container
-	// Returns false if specifed key already existed
-	// Override = true, returns true if specifed key already existed
+	// Returns false if specified key already existed
+	// Override = true, returns true if specified key already existed
 	bool AddData(const std::string & key, const std::string & val, bool override);
 
 	// Loads file
@@ -50,8 +47,8 @@ public:
 	// Returns false if no section name, no {} or var have no val
 	bool Parse();
 	// Saves data to file.
-	// Returns false if specifed file already existed
-	// Override = true, returns true if specifed file already existed
+	// Returns false if specified file already existed
+	// Override = true, returns true if specified file already existed
 	bool SaveToFile(const std::string & filePath, bool override);
 	// Cleans data, sets name to @none
 	void Clear();

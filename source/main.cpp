@@ -1,16 +1,18 @@
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
-#include "Managing/ResourceManager.hpp"
-#include <iostream>
-#include <memory>
-#include <Util/Game.hpp>
+#include <SFML/System/Err.hpp>
+#include "Engine/Util/Game.hpp"
+
 
 int main()
 {
 	try
 	{
-		sf::err().rdbuf(0);
+		//sf::err().rdbuf(0);
+
+		PlayState ps("resources/playState.config");
+
 		ce::Game game;
+		game.AddState(1, &ps);
+		
 		game.Run();
 	}
 	catch (std::runtime_error & rm)

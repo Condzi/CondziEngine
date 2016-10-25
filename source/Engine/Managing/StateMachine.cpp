@@ -1,17 +1,17 @@
-#include "Managing/StateManager.hpp"
+#include "Engine/Managing/StateMachine.hpp"
 
-ce::StateManager::StateManager(unsigned short stateToStart)
+ce::StateMachine::StateMachine(unsigned short stateToStart)
 {
 	m_currentState = stateToStart;
 }
 
-void ce::StateManager::AddSate(unsigned short id, State * state)
+void ce::StateMachine::AddState(unsigned short id, State * state)
 {
 	for (auto it = m_states.begin(); it != m_states.end(); ++it)
 	{
 		if (it->first == id)
 		{
-			Logger::LogToFile("StateManager: Cannot add state, found same state name!");
+			Logger::LogToFile("StateMachine: Cannot add state, found same state name!");
 			return;
 		}
 	}
@@ -19,11 +19,11 @@ void ce::StateManager::AddSate(unsigned short id, State * state)
 	m_states[id] = state;
 }
 
-void ce::StateManager::Run()
+void ce::StateMachine::Run()
 {
 	if (!m_states.size())
 	{
-		Logger::LogToFile("StateManager: Cannot run, no states!");
+		Logger::LogToFile("StateMachine: Cannot run, no states!");
 		return;
 	}
 
@@ -48,7 +48,7 @@ void ce::StateManager::Run()
 			// Pooping to menu or somewhere
 			m_currentState = 0;
 
-			Logger::LogToFile("StateManager: Cannot switch states, switching to " + std::to_string(m_currentState) + "!");
+			Logger::LogToFile("StateMachine: Cannot switch states, switching to " + std::to_string(m_currentState) + "!");
 		}
 	}
 }
