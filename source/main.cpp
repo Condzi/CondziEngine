@@ -8,7 +8,10 @@ int main()
 	{
 		//sf::err().rdbuf(0);
 
+		PlayState ps("resources/playState.config");
+
 		ce::Game game;
+		game.AddState(1, &ps);
 		
 		game.Run();
 	}

@@ -5,7 +5,7 @@ ce::StateMachine::StateMachine(unsigned short stateToStart)
 	m_currentState = stateToStart;
 }
 
-void ce::StateMachine::AddSate(unsigned short id, State * state)
+void ce::StateMachine::AddState(unsigned short id, State * state)
 {
 	for (auto it = m_states.begin(); it != m_states.end(); ++it)
 	{

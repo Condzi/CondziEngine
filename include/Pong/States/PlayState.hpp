@@ -23,7 +23,7 @@ private:
 	void handleCollisions();
 
 public:
-	PlayState(sf::RenderWindow & window, const std::string & reosurceCacheConfig);
+	PlayState(const std::string & reosurceCacheConfig);
 
 	short Run();
 

@@ -11,7 +11,7 @@ namespace ce
 	public:
 		StateMachine(unsigned short stateToStart = 1);
 
-		void AddSate(unsigned short id, State * state);
+		void AddState(unsigned short id, State * state);
 
 		void Run();
 

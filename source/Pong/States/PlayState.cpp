@@ -111,7 +111,7 @@ void PlayState::handleCollisions()
 	}
 }
 
-PlayState::PlayState(sf::RenderWindow & window, const std::string & reosurceCacheConfig) : State(window, reosurceCacheConfig)
+PlayState::PlayState(const std::string & reosurceCacheConfig) : State(reosurceCacheConfig)
 {
 	auto duration = std::chrono::system_clock::now().time_since_epoch();
 	auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
@@ -126,14 +126,14 @@ PlayState::PlayState(sf::RenderWindow & window, const std::string & reosurceCach
 
 	m_textCounterA.setString(std::to_string(m_counterA));
 	m_textCounterB.setString(std::to_string(m_counterB));
-
-	setResources();
-	resetPositions();
-	randBallVelocityVector();
 }
 
 short PlayState::Run()
 {
+	setResources();
+	resetPositions();
+	randBallVelocityVector();
+
 	bool play = true;
 	float deltaTime = 0.0f;
 	sf::Clock fpsClock;

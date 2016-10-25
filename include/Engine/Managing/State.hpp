@@ -7,11 +7,12 @@ namespace ce
 	class State
 	{
 	public:
-		State(sf::RenderWindow & window, const std::string & resourceCacheConfig);
+		State(const std::string & resourceCacheConfig);
 		~State();
 
+		void SetWindowPointer(sf::RenderWindow * window);
 		// Returns -1 to exit or state id to switch
-		virtual short Run() = 0;
+		virtual short Run();
 
 	protected:
 		sf::RenderWindow * m_window;
