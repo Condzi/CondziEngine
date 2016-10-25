@@ -58,25 +58,6 @@ std::string ConfigFile::GetData(const std::string & key)
 	return m_data[key];
 }
 
-std::string ConfigFile::GetData(const unsigned short & val)
-{
-	unsigned short counter = 0;
-	for (auto it = m_data.begin(); it != m_data.end(); ++it)
-	{
-		if (counter == val)
-		{
-			return m_data[it->first];
-		}
-
-		m_data[it->first];
-		m_data[it->second];
-
-		++counter;
-	}
-
-	return "@none";
-}
-
 unsigned short ConfigFile::GetAmountOfData()
 {
 	return m_data.size();

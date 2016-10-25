@@ -27,9 +27,6 @@ public:
 	// Returns data from given key
 	// Returns "@none" if cannot find
 	std::string GetData(const std::string & key);
-	// Returns data from given value
-	// Returns "@none" if cannot find
-	std::string GetData(const unsigned short & val);
 	// Return amount of all data stored
 	unsigned short GetAmountOfData();
 
