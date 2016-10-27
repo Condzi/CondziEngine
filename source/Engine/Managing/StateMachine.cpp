@@ -11,7 +11,8 @@ void ce::StateMachine::AddState(unsigned short id, State * state)
 	{
 		if (it->first == id)
 		{
-			Logger::LogToFile("StateMachine: Cannot add state, found same state name!");
+			Logger::LogToFile("StateMachine: Cannot add state, found same state id!");
+			
 			return;
 		}
 	}
@@ -24,6 +25,7 @@ void ce::StateMachine::Run()
 	if (!m_states.size())
 	{
 		Logger::LogToFile("StateMachine: Cannot run, no states!");
+		
 		return;
 	}
 
@@ -49,9 +51,10 @@ void ce::StateMachine::Run()
 
 			if (!stateFound)
 			{
+				Logger::LogToFile("StateMachine: Cannot switch states, switching to " + std::to_string(m_currentState) + "!");
+				
 				// Pooping to menu or somewhere
 				m_currentState = 1;
-				Logger::LogToFile("StateMachine: Cannot switch states, switching to " + std::to_string(m_currentState) + "!");
 			}
 		}
 	}

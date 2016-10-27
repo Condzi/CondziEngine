@@ -21,6 +21,7 @@ short ce::State::Run()
 	if (m_window == nullptr)
 	{
 		ce::Logger::LogToFile("State: m_window is nullptr!");
+		
 		return -1;
 	}
 }
