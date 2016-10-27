@@ -28,6 +28,7 @@ void ce::StateMachine::Run()
 	}
 
 	int nextState = 0;
+	bool stateFound = false;
 
 	while (nextState != -1)
 	{
@@ -35,20 +36,23 @@ void ce::StateMachine::Run()
 
 		if (nextState != m_currentState)
 		{
+			stateFound = false;
 			for (auto it = m_states.begin(); it != m_states.end(); ++it)
 			{
 				if (it->first == nextState)
 				{
 					m_currentState = nextState;
+					stateFound = true;
 					break;
 				}
 			}
 
-	
-			// Pooping to menu or somewhere
-			m_currentState = 0;
-
-			Logger::LogToFile("StateMachine: Cannot switch states, switching to " + std::to_string(m_currentState) + "!");
+			if (!stateFound)
+			{
+				// Pooping to menu or somewhere
+				m_currentState = 1;
+				Logger::LogToFile("StateMachine: Cannot switch states, switching to " + std::to_string(m_currentState) + "!");
+			}
 		}
 	}
 }
