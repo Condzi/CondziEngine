@@ -9,6 +9,7 @@ int main()
 		//sf::err().rdbuf(0);
 
 		PlayState ps("resources/playState.config");
+		//PlayState ps("");
 
 		ce::Game game;
 		game.AddState(1, &ps);

@@ -13,16 +13,22 @@ void ce::ResourceCache::loadTextures(std::string & configFilePath)
 	sf::Texture temporaryTexture;
 	std::map< std::string, sf::Texture > tempTextures;
 
-	if (!cfg.LoadFromFile(configFilePath, false) &&
-		logErrors)
+	if (!cfg.LoadFromFile(configFilePath, false))
 	{
-		Logger::LogToFile("ResourceCache: Cannot -open- .config file with -textures- paths!");
+		if (logErrors)
+		{
+			Logger::LogToFile("ResourceCache: Cannot -open- .config file with -textures- paths!");
+		}
+		return;
 	}
 
-	if (!cfg.Parse() &&
-		logErrors)
+	if (!cfg.Parse())
 	{
-		Logger::LogToFile("ResourceCache: Cannot -parse- .config file with -textures- paths!");
+		if (logErrors)
+		{
+			Logger::LogToFile("ResourceCache: Cannot -parse- .config file with -textures- paths!");
+		}
+		return;
 	}
 
 	for (unsigned short counter = 0; counter < cfg.GetAmountOfData(); ++counter)
@@ -54,16 +60,22 @@ void ce::ResourceCache::loadFonts(std::string & configFilePath)
 	sf::Font temporaryFont;
 	std::map< std::string, sf::Font > tempFonts;
 
-	if (!cfg.LoadFromFile(configFilePath, false) &&
-		logErrors)
+	if (!cfg.LoadFromFile(configFilePath, false))
 	{
-		Logger::LogToFile("ResourceCache: Cannot -open- .config file with -fonts- paths!");
+		if (logErrors)
+		{
+			Logger::LogToFile("ResourceCache: Cannot -open- .config file with -textures- paths!");
+		}
+		return;
 	}
 
-	if (!cfg.Parse() &&
-		logErrors)
+	if (!cfg.Parse())
 	{
-		Logger::LogToFile("ResourceCache: Cannot -parse- .config file with -fonts- paths!");
+		if (logErrors)
+		{
+			Logger::LogToFile("ResourceCache: Cannot -parse- .config file with -textures- paths!");
+		}
+		return;
 	}
 
 	for (unsigned short counter = 0; counter < cfg.GetAmountOfData(); ++counter)
@@ -95,16 +107,22 @@ void ce::ResourceCache::loadSoundBuffers(std::string & configFilePath)
 	sf::SoundBuffer temporarySoundBuffer;
 	std::map< std::string, sf::SoundBuffer > tempSoundBuffers;
 
-	if (!cfg.LoadFromFile(configFilePath, false) &&
-		logErrors)
+	if (!cfg.LoadFromFile(configFilePath, false))
 	{
-		Logger::LogToFile("ResourceCache: Cannot -open- .config file with -sounds- paths!");
+		if (logErrors)
+		{
+			Logger::LogToFile("ResourceCache: Cannot -open- .config file with -textures- paths!");
+		}
+		return;
 	}
 
-	if (!cfg.Parse() &&
-		logErrors)
+	if (!cfg.Parse())
 	{
-		Logger::LogToFile("ResourceCache: Cannot -parse- .config file with -sounds- paths!");
+		if (logErrors)
+		{
+			Logger::LogToFile("ResourceCache: Cannot -parse- .config file with -textures- paths!");
+		}
+		return;
 	}
 
 	for (unsigned short counter = 0; counter < cfg.GetAmountOfData(); ++counter)
@@ -131,17 +149,32 @@ ce::ResourceCache::ResourceCache(const std::string & configFilePath)
 #ifdef DEBUG_LOG
 	logErrors = true;
 #endif // DEBUG_LOG		
-
-	if (!cfg.LoadFromFile(configFilePath, false) &&
-		logErrors)
+	
+	if (!configFilePath.size())
 	{
-		Logger::LogToFile("ResourceCache: Cannot -open- .config file with -resources config- paths!");
+		if (logErrors)
+		{
+			Logger::LogToFile("ResourceCache: No config file path");
+		}
+		return;
 	}
 
-	if (!cfg.Parse() &&
-		logErrors)
+	if (!cfg.LoadFromFile(configFilePath, false))
 	{
-		Logger::LogToFile("ResourceCache: Cannot -parse- .config file with -resources config- paths!");
+		if (logErrors)
+		{
+			Logger::LogToFile("ResourceCache: Cannot -open- .config file with -resources config- paths!");
+		}
+		return;
+	}
+
+	if (!cfg.Parse())
+	{
+		if (logErrors)
+		{
+			Logger::LogToFile("ResourceCache: Cannot -parse- .config file with -resources config- paths!");
+		}
+		return;
 	}
 
 	loadTextures(cfg.GetData("TEXTURES"));
