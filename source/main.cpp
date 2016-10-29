@@ -1,5 +1,6 @@
 #include <SFML/System/Err.hpp>
 #include "Engine/Util/Game.hpp"
+#include "Pong/States/PlayState.hpp"
 
 
 int main()

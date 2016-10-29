@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include "Engine/Managing/StateMachine.hpp"
-#include "Pong/States/PlayState.hpp"
 #include "Engine/Logger/Logger.hpp"
 
 namespace ce
