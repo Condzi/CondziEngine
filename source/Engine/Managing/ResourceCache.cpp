@@ -49,14 +49,14 @@ void ce::ResourceCache::loadFonts(std::string & configFilePath)
 
 	if (!cfg.LoadFromFile(configFilePath, false))
 	{
-		Logger::LogToFile("ResourceCache: Cannot -open- .config file with -textures- paths!");
+		Logger::LogToFile("ResourceCache: Cannot -open- .config file with -fonts- paths!");
 		
 		return;
 	}
 
 	if (!cfg.Parse())
 	{
-		Logger::LogToFile("ResourceCache: Cannot -parse- .config file with -textures- paths!");
+		Logger::LogToFile("ResourceCache: Cannot -parse- .config file with -fonts- paths!");
 
 		return;
 	}
@@ -88,14 +88,14 @@ void ce::ResourceCache::loadSoundBuffers(std::string & configFilePath)
 
 	if (!cfg.LoadFromFile(configFilePath, false))
 	{		
-		Logger::LogToFile("ResourceCache: Cannot -open- .config file with -textures- paths!");
+		Logger::LogToFile("ResourceCache: Cannot -open- .config file with -sound buffers- paths!");
 		
 		return;
 	}
 
 	if (!cfg.Parse())
 	{
-		Logger::LogToFile("ResourceCache: Cannot -parse- .config file with -textures- paths!");
+		Logger::LogToFile("ResourceCache: Cannot -parse- .config file with -sound buffers- paths!");
 		
 		return;
 	}
@@ -115,6 +115,43 @@ void ce::ResourceCache::loadSoundBuffers(std::string & configFilePath)
 	}
 
 	m_soundBuffers = tempSoundBuffers;
+}
+
+void ce::ResourceCache::loadMusic(std::string & configFilePath)
+{
+	ConfigFile cfg;
+
+	std::string tempName;
+	sf::Music temporaryMusic;
+
+	if (!cfg.LoadFromFile(configFilePath, false))
+	{
+		Logger::LogToFile("ResourceCache: Cannot -open- .config file with -musics- paths!");
+
+		return;
+	}
+
+	if (!cfg.Parse())
+	{
+		Logger::LogToFile("ResourceCache: Cannot -parse- .config file with -musics- paths!");
+
+		return;
+	}
+
+	for (unsigned short counter = 0; counter < cfg.GetAmountOfData(); ++counter)
+	{
+		tempName = cfg.GetData("name" + std::to_string(counter));
+
+		if (!temporaryMusic.openFromFile(cfg.GetData("path" + std::to_string(counter))))
+		{
+			Logger::LogToFile("ResourceCache: " + tempName + " - " + cfg.GetData("path" + std::to_string(counter)) + " - cannot -load music-!");
+
+			continue;
+		}
+
+		m_music[tempName].openFromFile(cfg.GetData("path" + std::to_string(counter)));
+	}
+
 }
 
 ce::ResourceCache::ResourceCache(const std::string & configFilePath)
@@ -145,6 +182,7 @@ ce::ResourceCache::ResourceCache(const std::string & configFilePath)
 	loadTextures(cfg.GetData("TEXTURES"));
 	loadFonts(cfg.GetData("FONTS"));
 	loadSoundBuffers(cfg.GetData("SOUNDBUFFERS"));
+	loadMusic(cfg.GetData("MUSIC"));
 }
 
 const sf::Texture & ce::ResourceCache::GetTexture(const std::string & key)
@@ -190,4 +228,19 @@ const sf::SoundBuffer & ce::ResourceCache::GetSoundBuffer(const std::string & ke
 	Logger::LogToFile("ResourceCache: Cannot -get (find)- sound buffer " + key + "!");
 	
 	return m_templateSoundBuffer;
+}
+
+const sf::Music & ce::ResourceCache::GetMusic(const std::string & key)
+{
+	for (auto it = m_music.begin(); it != m_music.end(); ++it)
+	{
+		if (it->first == key)
+		{
+			return m_music[key];
+		}
+	}
+
+	Logger::LogToFile("ResourceCache: Cannot -get (find)- music " + key + "!");
+
+	return m_templateMusic;
 }
