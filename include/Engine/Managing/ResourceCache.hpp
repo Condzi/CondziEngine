@@ -27,7 +27,7 @@ namespace ce
 		const sf::Texture & GetTexture(const std::string & key);
 		const sf::Font & GetFont(const std::string & key);
 		const sf::SoundBuffer & GetSoundBuffer(const std::string & key);
-		const sf::Music & GetMusic(const std::string & key);
+		sf::Music & GetMusic(const std::string & key);
 
 	private:
 		std::map< std::string, sf::Texture > m_textures;

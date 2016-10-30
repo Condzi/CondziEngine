@@ -2,6 +2,13 @@
 
 void ce::ResourceCache::loadTextures(std::string & configFilePath)
 {
+	if (configFilePath == "@none")
+	{
+		Logger::LogToFile("ResourceCache: no -textures- path");
+
+		return;
+	}
+
 	ConfigFile cfg;
 
 	std::string tempName;
@@ -22,7 +29,14 @@ void ce::ResourceCache::loadTextures(std::string & configFilePath)
 		return;
 	}
 
-	for (unsigned short counter = 0; counter < cfg.GetAmountOfData(); ++counter)
+	if (cfg.GetAmountOfData() % 2)
+	{
+		Logger::LogToFile("ResourceCache: .config with -textures- have odd number of data (no name or path?)");
+		
+		return;
+	}
+
+	for (unsigned short counter = 0; counter < cfg.GetAmountOfData() / 2; ++counter)
 	{
 		tempName = cfg.GetData("name" + std::to_string(counter));
 
@@ -41,6 +55,13 @@ void ce::ResourceCache::loadTextures(std::string & configFilePath)
 
 void ce::ResourceCache::loadFonts(std::string & configFilePath)
 {
+	if (configFilePath == "@none")
+	{
+		Logger::LogToFile("ResourceCache: no -fonts- path");
+
+		return;
+	}
+
 	ConfigFile cfg;
 
 	std::string tempName;
@@ -61,7 +82,14 @@ void ce::ResourceCache::loadFonts(std::string & configFilePath)
 		return;
 	}
 
-	for (unsigned short counter = 0; counter < cfg.GetAmountOfData(); ++counter)
+	if (cfg.GetAmountOfData() % 2)
+	{
+		Logger::LogToFile("ResourceCache: .config with -fonts- have odd number of data (no name or path?)");
+
+		return;
+	}
+
+	for (unsigned short counter = 0; counter < cfg.GetAmountOfData() / 2; ++counter)
 	{
 		tempName = cfg.GetData("name" + std::to_string(counter));
 
@@ -80,6 +108,13 @@ void ce::ResourceCache::loadFonts(std::string & configFilePath)
 
 void ce::ResourceCache::loadSoundBuffers(std::string & configFilePath)
 {
+	if (configFilePath == "@none")
+	{
+		Logger::LogToFile("ResourceCache: no -sound buffers- path");
+
+		return;
+	}
+
 	ConfigFile cfg;
 
 	std::string tempName;
@@ -100,7 +135,14 @@ void ce::ResourceCache::loadSoundBuffers(std::string & configFilePath)
 		return;
 	}
 
-	for (unsigned short counter = 0; counter < cfg.GetAmountOfData(); ++counter)
+	if (cfg.GetAmountOfData() % 2)
+	{
+		Logger::LogToFile("ResourceCache: .config with -sound buffers- have odd number of data (no name or path?)");
+
+		return;
+	}
+
+	for (unsigned short counter = 0; counter < cfg.GetAmountOfData() / 2; ++counter)
 	{
 		tempName = cfg.GetData("name" + std::to_string(counter));
 
@@ -119,6 +161,13 @@ void ce::ResourceCache::loadSoundBuffers(std::string & configFilePath)
 
 void ce::ResourceCache::loadMusic(std::string & configFilePath)
 {
+	if (configFilePath == "@none")
+	{
+		Logger::LogToFile("ResourceCache: no -musics- path");
+
+		return;
+	}
+
 	ConfigFile cfg;
 
 	std::string tempName;
@@ -138,7 +187,14 @@ void ce::ResourceCache::loadMusic(std::string & configFilePath)
 		return;
 	}
 
-	for (unsigned short counter = 0; counter < cfg.GetAmountOfData(); ++counter)
+	if (cfg.GetAmountOfData() % 2)
+	{
+		Logger::LogToFile("ResourceCache: .config with -musics- have odd number of data (no name or path?)");
+
+		return;
+	}
+
+	for (unsigned short counter = 0; counter < cfg.GetAmountOfData() / 2; ++counter)
 	{
 		tempName = cfg.GetData("name" + std::to_string(counter));
 
@@ -151,7 +207,6 @@ void ce::ResourceCache::loadMusic(std::string & configFilePath)
 
 		m_music[tempName].openFromFile(cfg.GetData("path" + std::to_string(counter)));
 	}
-
 }
 
 ce::ResourceCache::ResourceCache(const std::string & configFilePath)
@@ -160,7 +215,7 @@ ce::ResourceCache::ResourceCache(const std::string & configFilePath)
 	
 	if (!configFilePath.size())
 	{
-		Logger::LogToFile("ResourceCache: No config file path");
+		Logger::LogToFile("ResourceCache: no -config file- path");
 		
 		return;
 	}
@@ -230,7 +285,7 @@ const sf::SoundBuffer & ce::ResourceCache::GetSoundBuffer(const std::string & ke
 	return m_templateSoundBuffer;
 }
 
-const sf::Music & ce::ResourceCache::GetMusic(const std::string & key)
+sf::Music & ce::ResourceCache::GetMusic(const std::string & key)
 {
 	for (auto it = m_music.begin(); it != m_music.end(); ++it)
 	{
