@@ -1,5 +1,6 @@
 #pragma once
 #include <random>
+#include <ctime>
 #include "Engine/Logger/Logger.hpp"
 
 namespace ce
