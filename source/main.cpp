@@ -1,5 +1,6 @@
 #include <SFML/System/Err.hpp>
 #include "Engine/Util/Game.hpp"
+#include "Engine/Util/Utility.hpp"
 #include "Pong/States/PlayState.hpp"
 
 
@@ -7,15 +8,23 @@ int main()
 {
 	try
 	{
-		//sf::err().rdbuf(0);
+		ce::random::SetSeed(time(0));
+	
+		for (unsigned i = 0; i < 100; ++i)
+		{
+			std::cout << ce::random::GetValue(-10, 10);
+			std::cin.get();
+		}
 
-		PlayState ps("resources/playState.config");
-		//PlayState ps("");
+		////sf::err().rdbuf(0);
 
-		ce::Game game;
-		game.AddState(1, &ps);
-		
-		game.Run();
+		//PlayState ps("resources/playState.config");
+		////PlayState ps("");
+
+		//ce::Game game;
+		//game.AddState(1, &ps);
+		//
+		//game.Run();
 	}
 	catch (std::runtime_error & rm)
 	{
