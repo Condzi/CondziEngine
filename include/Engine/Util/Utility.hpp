@@ -4,12 +4,30 @@
 
 namespace ce
 {
-	namespace random
+	namespace Random
 	{
-		// Sets generator seed (call once in program)
-		// If you want to overwrite seed set flag overwrite to true
-		void SetSeed(unsigned int seed, bool overwrite = false);
-		// Returns random value between rangeBegin and rangeEnd
-		int GetValue(int rangeBegin, int rangeEnd);
+		static std::default_random_engine randomEngine(static_cast<unsigned long>(std::time(nullptr)));
+
+		static inline float Value(float begin, float end)
+		{
+			if (begin > end)
+			{
+				ce::Logger::LogToFile("Random: begin value greater than end, strange behavior may occur");
+			}
+
+			std::uniform_real_distribution<float> dist(begin, end);
+			return dist(randomEngine);
+		}
+
+		static inline int Value(int begin, int end)
+		{
+			if (begin > end)
+			{
+				ce::Logger::LogToFile("Random: begin value greater than end, strange behavior may occur");
+			}
+
+			std::uniform_int_distribution<int> dist(begin, end);
+			return dist(randomEngine);
+		}
 	}
 }

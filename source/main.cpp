@@ -8,11 +8,10 @@ int main()
 {
 	try
 	{
-		ce::random::SetSeed(time(0));
-	
+
 		for (unsigned i = 0; i < 100; ++i)
 		{
-			std::cout << ce::random::GetValue(-10, 10);
+			std::cout << ce::Random::Value(-10.f, 10.f);
 			std::cin.get();
 		}
 
