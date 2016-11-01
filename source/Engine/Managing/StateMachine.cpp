@@ -13,7 +13,7 @@ void ce::StateMachine::AddState(unsigned short id, State * state)
 	{
 		if (it->first == id)
 		{
-			Logger::LogToBoth("StateMachine: Cannot add state, found same state id! ID: " + std::to_string(id), Logger::MessageType::Error);
+			Logger::Log("StateMachine: Cannot add state, found same state id! ID: " + std::to_string(id), Logger::MessageType::Error, Logger::Output::All);
 			return;
 		}
 	}
@@ -49,7 +49,7 @@ void ce::StateMachine::Run()
 			{
 				m_currentState = 0;
 
-				Logger::LogToFile("StateMachine: Cannot switch states, switching to " + std::to_string(m_currentState) + "!", Logger::MessageType::Warning);
+				Logger::Log("StateMachine: Cannot switch states, switching to " + std::to_string(m_currentState) + "!", Logger::MessageType::Warning, Logger::Output::Console);
 			}
 		}
 	}

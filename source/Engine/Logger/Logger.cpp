@@ -1,6 +1,29 @@
 #include "Engine/Logger/Logger.hpp"
 
-void ce::Logger::LogToFile(const std::string & msg, MessageType type)
+void ce::Logger::Log(const std::string & msg, MessageType type, Output output)
+{
+#ifdef _DEBUG_
+
+	switch (output)
+	{
+	case ce::Logger::Output::All:
+		internal::logToConsole(msg, type);
+		// To make id in file and console match
+		--msgCounter;
+		internal::logToFile(msg, type);
+		break;
+	case ce::Logger::Output::File:
+		internal::logToFile(msg, type);
+		break;
+	case ce::Logger::Output::Console:
+		internal::logToConsole(msg, type);
+		break;
+	}
+
+#endif // _DEBUG_
+}
+
+void ce::Logger::internal::logToFile(const std::string & msg, MessageType type)
 {
 #ifdef _DEBUG_
 
@@ -31,7 +54,7 @@ void ce::Logger::LogToFile(const std::string & msg, MessageType type)
 #endif
 }
 
-void ce::Logger::LogToConsole(const std::string & msg, MessageType type)
+void ce::Logger::internal::logToConsole(const std::string & msg, MessageType type)
 {
 #ifdef _DEBUG_
 
@@ -50,13 +73,5 @@ void ce::Logger::LogToConsole(const std::string & msg, MessageType type)
 	++msgCounter;
 
 #endif
-}
-
-void ce::Logger::LogToBoth(const std::string & msg, MessageType type)
-{
-	LogToFile(msg, type);
-	// To make id in file and console match
-	--msgCounter;
-	LogToConsole(msg, type);
 }
 

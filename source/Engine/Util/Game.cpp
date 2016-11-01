@@ -15,10 +15,10 @@ void ce::Game::AddState(unsigned short id, State * state)
 
 void ce::Game::Run()
 {	
-	Logger::LogToBoth("\n=====\nStarting Game\n=====", Logger::MessageType::Info);
+	Logger::Log("\n=====\nStarting Game\n=====", Logger::MessageType::Info, Logger::Output::All);
 
 	m_stateMachine.Run();
 	m_window.close();
 
-	Logger::LogToBoth("\n=====\nClosing Game\n=====", Logger::MessageType::Info);
+	Logger::Log("\n=====\nClosing Game\n=====", Logger::MessageType::Info, Logger::Output::All);
 }

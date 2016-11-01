@@ -4,7 +4,7 @@ void ce::ResourceCache::loadTextures(std::string & configFilePath)
 {
 	if (configFilePath == "@none")
 	{
-		Logger::LogToBoth("ResourceCache: no -textures- path", Logger::MessageType::Warning);
+		Logger::Log("ResourceCache: no -textures- path", Logger::MessageType::Warning, Logger::Output::All);
 
 		return;
 	}
@@ -17,21 +17,21 @@ void ce::ResourceCache::loadTextures(std::string & configFilePath)
 
 	if (!cfg.LoadFromFile(configFilePath, false))
 	{
-		Logger::LogToBoth("ResourceCache: Cannot -open- .config file with -textures- paths!", Logger::MessageType::Warning);
+		Logger::Log("ResourceCache: Cannot -open- .config file with -textures- paths!", Logger::MessageType::Warning, Logger::Output::All);
 		
 		return;
 	}
 
 	if (!cfg.Parse())
 	{
-		Logger::LogToBoth("ResourceCache: Cannot -parse- .config file with -textures- paths!", Logger::MessageType::Error);
+		Logger::Log("ResourceCache: Cannot -parse- .config file with -textures- paths!", Logger::MessageType::Error, Logger::Output::All);
 		
 		return;
 	}
 
 	if (cfg.GetAmountOfData() % 2)
 	{
-		Logger::LogToBoth("ResourceCache: .config with -textures- have odd number of data (no name or path?)", Logger::MessageType::Error);
+		Logger::Log("ResourceCache: .config with -textures- have odd number of data (no name or path?)", Logger::MessageType::Error, Logger::Output::All);
 		
 		return;
 	}
@@ -42,7 +42,7 @@ void ce::ResourceCache::loadTextures(std::string & configFilePath)
 
 		if (!temporaryTexture.loadFromFile(cfg.GetData("path" + std::to_string(counter))))
 		{
-			Logger::LogToBoth("ResourceCache: " + tempName + " - " + cfg.GetData("path" + std::to_string(counter)) + " - cannot -load texture-!", Logger::MessageType::Error);
+			Logger::Log("ResourceCache: " + tempName + " - " + cfg.GetData("path" + std::to_string(counter)) + " - cannot -load texture-!", Logger::MessageType::Error, Logger::Output::All);
 		
 			continue;
 		}
@@ -57,7 +57,7 @@ void ce::ResourceCache::loadFonts(std::string & configFilePath)
 {
 	if (configFilePath == "@none")
 	{
-		Logger::LogToBoth("ResourceCache: no -fonts- path", Logger::MessageType::Warning);
+		Logger::Log("ResourceCache: no -fonts- path", Logger::MessageType::Warning, Logger::Output::All);
 
 		return;
 	}
@@ -70,21 +70,21 @@ void ce::ResourceCache::loadFonts(std::string & configFilePath)
 
 	if (!cfg.LoadFromFile(configFilePath, false))
 	{
-		Logger::LogToBoth("ResourceCache: Cannot -open- .config file with -fonts- paths!", Logger::MessageType::Error);
+		Logger::Log("ResourceCache: Cannot -open- .config file with -fonts- paths!", Logger::MessageType::Error, Logger::Output::All);
 		
 		return;
 	}
 
 	if (!cfg.Parse())
 	{
-		Logger::LogToBoth("ResourceCache: Cannot -parse- .config file with -fonts- paths!", Logger::MessageType::Error);
+		Logger::Log("ResourceCache: Cannot -parse- .config file with -fonts- paths!", Logger::MessageType::Error, Logger::Output::All);
 
 		return;
 	}
 
 	if (cfg.GetAmountOfData() % 2)
 	{
-		Logger::LogToBoth("ResourceCache: .config with -fonts- have odd number of data (no name or path?)", Logger::MessageType::Error);
+		Logger::Log("ResourceCache: .config with -fonts- have odd number of data (no name or path?)", Logger::MessageType::Error, Logger::Output::All);
 
 		return;
 	}
@@ -95,7 +95,7 @@ void ce::ResourceCache::loadFonts(std::string & configFilePath)
 
 		if (!temporaryFont.loadFromFile(cfg.GetData("path" + std::to_string(counter))))
 		{
-			Logger::LogToBoth("ResourceCache: " + tempName + " - " + cfg.GetData("path" + std::to_string(counter)) + " - cannot -load font-!", Logger::MessageType::Error);
+			Logger::Log("ResourceCache: " + tempName + " - " + cfg.GetData("path" + std::to_string(counter)) + " - cannot -load font-!", Logger::MessageType::Error,Logger::Output::All);
 			
 			continue;
 		}
@@ -110,7 +110,7 @@ void ce::ResourceCache::loadSoundBuffers(std::string & configFilePath)
 {
 	if (configFilePath == "@none")
 	{
-		Logger::LogToBoth("ResourceCache: no -sound buffers- path", Logger::MessageType::Warning);
+		Logger::Log("ResourceCache: no -sound buffers- path", Logger::MessageType::Warning, Logger::Output::All);
 
 		return;
 	}
@@ -123,21 +123,21 @@ void ce::ResourceCache::loadSoundBuffers(std::string & configFilePath)
 
 	if (!cfg.LoadFromFile(configFilePath, false))
 	{		
-		Logger::LogToBoth("ResourceCache: Cannot -open- .config file with -sound buffers- paths!", Logger::MessageType::Error);
+		Logger::Log("ResourceCache: Cannot -open- .config file with -sound buffers- paths!", Logger::MessageType::Error, Logger::Output::All);
 		
 		return;
 	}
 
 	if (!cfg.Parse())
 	{
-		Logger::LogToBoth("ResourceCache: Cannot -parse- .config file with -sound buffers- paths!", Logger::MessageType::Error);
+		Logger::Log("ResourceCache: Cannot -parse- .config file with -sound buffers- paths!", Logger::MessageType::Error, Logger::Output::All);
 		
 		return;
 	}
 
 	if (cfg.GetAmountOfData() % 2)
 	{
-		Logger::LogToBoth("ResourceCache: .config with -sound buffers- have odd number of data (no name or path?)", Logger::MessageType::Error);
+		Logger::Log("ResourceCache: .config with -sound buffers- have odd number of data (no name or path?)", Logger::MessageType::Error, Logger::Output::All);
 
 		return;
 	}
@@ -148,7 +148,7 @@ void ce::ResourceCache::loadSoundBuffers(std::string & configFilePath)
 
 		if (!temporarySoundBuffer.loadFromFile(cfg.GetData("path" + std::to_string(counter))))
 		{
-			Logger::LogToBoth("ResourceCache: " + tempName + " - " + cfg.GetData("path" + std::to_string(counter)) + " - cannot -load sound-!", Logger::MessageType::Error);
+			Logger::Log("ResourceCache: " + tempName + " - " + cfg.GetData("path" + std::to_string(counter)) + " - cannot -load sound-!", Logger::MessageType::Error, Logger::Output::All);
 		
 			continue;
 		}
@@ -163,7 +163,7 @@ void ce::ResourceCache::loadMusic(std::string & configFilePath)
 {
 	if (configFilePath == "@none")
 	{
-		Logger::LogToBoth("ResourceCache: no -musics- path", Logger::MessageType::Warning);
+		Logger::Log("ResourceCache: no -musics- path", Logger::MessageType::Warning, Logger::Output::All);
 
 		return;
 	}
@@ -175,21 +175,21 @@ void ce::ResourceCache::loadMusic(std::string & configFilePath)
 
 	if (!cfg.LoadFromFile(configFilePath, false))
 	{
-		Logger::LogToBoth("ResourceCache: Cannot -open- .config file with -musics- paths!", Logger::MessageType::Error);
+		Logger::Log("ResourceCache: Cannot -open- .config file with -musics- paths!", Logger::MessageType::Error, Logger::Output::All);
 
 		return;
 	}
 
 	if (!cfg.Parse())
 	{
-		Logger::LogToBoth("ResourceCache: Cannot -parse- .config file with -musics- paths!", Logger::MessageType::Error);
+		Logger::Log("ResourceCache: Cannot -parse- .config file with -musics- paths!", Logger::MessageType::Error, Logger::Output::All);
 
 		return;
 	}
 
 	if (cfg.GetAmountOfData() % 2)
 	{
-		Logger::LogToBoth("ResourceCache: .config with -musics- have odd number of data (no name or path?)", Logger::MessageType::Error);
+		Logger::Log("ResourceCache: .config with -musics- have odd number of data (no name or path?)", Logger::MessageType::Error, Logger::Output::All);
 
 		return;
 	}
@@ -200,7 +200,7 @@ void ce::ResourceCache::loadMusic(std::string & configFilePath)
 
 		if (!temporaryMusic.openFromFile(cfg.GetData("path" + std::to_string(counter))))
 		{
-			Logger::LogToBoth("ResourceCache: " + tempName + " - " + cfg.GetData("path" + std::to_string(counter)) + " - cannot -load music-!", Logger::MessageType::Error);
+			Logger::Log("ResourceCache: " + tempName + " - " + cfg.GetData("path" + std::to_string(counter)) + " - cannot -load music-!", Logger::MessageType::Error, Logger::Output::All);
 
 			continue;
 		}
@@ -215,21 +215,21 @@ ce::ResourceCache::ResourceCache(const std::string & configFilePath)
 	
 	if (!configFilePath.size())
 	{
-		Logger::LogToBoth("ResourceCache: no -config file- path", Logger::MessageType::Warning);
+		Logger::Log("ResourceCache: no -config file- path", Logger::MessageType::Warning, Logger::Output::All);
 		
 		return;
 	}
 
 	if (!cfg.LoadFromFile(configFilePath, false))
 	{
-		Logger::LogToBoth("ResourceCache: Cannot -open- .config file with -resources config- paths!", Logger::MessageType::Error);
+		Logger::Log("ResourceCache: Cannot -open- .config file with -resources config- paths!", Logger::MessageType::Error, Logger::Output::All);
 	
 		return;
 	}
 
 	if (!cfg.Parse())
 	{
-		Logger::LogToBoth("ResourceCache: Cannot -parse- .config file with -resources config- paths!", Logger::MessageType::Error);
+		Logger::Log("ResourceCache: Cannot -parse- .config file with -resources config- paths!", Logger::MessageType::Error, Logger::Output::All);
 		
 		return;
 	}
@@ -250,7 +250,7 @@ const sf::Texture & ce::ResourceCache::GetTexture(const std::string & key)
 		}
 	}
 
-	Logger::LogToBoth("ResourceCache: Cannot -get (find)- texture " + key + "!", Logger::MessageType::Warning);
+	Logger::Log("ResourceCache: Cannot -get (find)- texture " + key + "!", Logger::MessageType::Warning, Logger::Output::All);
 	
 	return m_templateTexture;
 }
@@ -265,7 +265,7 @@ const sf::Font & ce::ResourceCache::GetFont(const std::string & key)
 		}
 	}
 
-	Logger::LogToBoth("ResourceCache: Cannot -get (find)- font " + key + "!", Logger::MessageType::Warning);
+	Logger::Log("ResourceCache: Cannot -get (find)- font " + key + "!", Logger::MessageType::Warning, Logger::Output::All);
 	
 	return m_templateFont;
 }
@@ -280,7 +280,7 @@ const sf::SoundBuffer & ce::ResourceCache::GetSoundBuffer(const std::string & ke
 		}
 	}
 
-	Logger::LogToBoth("ResourceCache: Cannot -get (find)- sound buffer " + key + "!", Logger::MessageType::Warning);
+	Logger::Log("ResourceCache: Cannot -get (find)- sound buffer " + key + "!", Logger::MessageType::Warning, Logger::Output::All);
 	
 	return m_templateSoundBuffer;
 }
@@ -295,7 +295,7 @@ sf::Music & ce::ResourceCache::GetMusic(const std::string & key)
 		}
 	}
 
-	Logger::LogToBoth("ResourceCache: Cannot -get (find)- music " + key + "!", Logger::MessageType::Warning);
+	Logger::Log("ResourceCache: Cannot -get (find)- music " + key + "!", Logger::MessageType::Warning, Logger::Output::All);
 
 	return m_templateMusic;
 }

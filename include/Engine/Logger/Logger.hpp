@@ -18,26 +18,39 @@ namespace ce
 		// Message type
 		enum class MessageType
 		{
-			AssertError = -1,
+			AssertError = 0,
 			Error,
 			Warning,
 			Info
 		};
 
-		// Saves message to log.txt file.
-		// msg	- message
-		// type - type of message (error, warning, info)
-		void LogToFile(const std::string & msg, MessageType type);
+		// Output 
+		enum class Output
+		{
+			All = 0,
+			File,
+			Console
+		};
 
-		// Prints message to console.
-		// msg	- message
-		// type	- type of message (error, warning, info)
-		void LogToConsole(const std::string & msg, MessageType type);
+		// Saves message to specified output.
+		// msg		- message
+		// type		- type of message (error, warning, info)
+		// output	- where save message
+		void Log(const std::string & msg, MessageType type, Output output);
 
-		// Prints message to console and saves to log.txt file.
-		// msg	- message
-		// type	- type of message (error, warning, info)
-		void LogToBoth(const std::string & msg, MessageType type);
+		// Internal log methods
+		namespace internal
+		{
+			// Saves message to log.txt file.
+			// msg	- message
+			// type - type of message (error, warning, info)
+			void logToFile(const std::string & msg, MessageType type);
+
+			// Prints message to console.
+			// msg	- message
+			// type	- type of message (error, warning, info)
+			void logToConsole(const std::string & msg, MessageType type);
+		}
 	}
 }
 
