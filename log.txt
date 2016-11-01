@@ -1,6 +1,0 @@
-0: ResourceCache: @none - @none - cannot -load texture-!
-1: ResourceCache: @none - @none - cannot -load texture-!
-2: ResourceCache: @none - @none - cannot -load font-!
-3: ResourceCache: @none - @none - cannot -load sound-!
-4: ResourceCache: @none - @none - cannot -load sound-!
-5: StateMachine: Cannot switch states, switching to 0!
