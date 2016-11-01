@@ -1,15 +1,20 @@
 #pragma once
 #include <map>
 #include "Engine/Managing/State.hpp"
-#include "Engine/Logger/Logger.hpp"
+#include "Engine/Assert.hpp"
 
 namespace ce
 {
-	// First (1) state should be Menu
+	// State Machine
+	// (used by Game class)
+	// Starting state should be Menu 
+	// Usually staring state number - 0
 	class StateMachine
 	{
 	public:
-		StateMachine(unsigned short stateToStart = 1);
+		// StateMachine constructor (default)
+		// stateToStart = 0	- number of state to start
+		StateMachine(unsigned short stateToStart = 0);
 
 		void AddState(unsigned short id, State * state);
 

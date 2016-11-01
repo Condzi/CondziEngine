@@ -13,15 +13,11 @@ ce::State::~State()
 
 void ce::State::SetWindowPointer(sf::RenderWindow * window)
 {
+	CE_ASSERT(window, "trying to set nullptr for window in state");
 	m_window = window;
 }
 
 short ce::State::Run()
 {
-	if (m_window == nullptr)
-	{
-		ce::Logger::LogToFile("State: m_window is nullptr!");
-		
-		return -1;
-	}
+	CE_ASSERT(m_window, "window is nullptr, window pointer not set");
 }

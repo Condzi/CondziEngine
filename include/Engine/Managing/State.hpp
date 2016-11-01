@@ -1,16 +1,25 @@
 #pragma once
 #include <SFML/Graphics/RenderWindow.hpp>
+#include "Engine/Assert.hpp"
 #include "Engine/Managing/ResourceCache.hpp"
 
 namespace ce
 {
+	// Virtual class Sate
+	// Inherit from it if you want to create State for Game
 	class State
 	{
 	public:
+		// State constructor (not default)
+		// resourceCacheConfig - path to cfg file with paths to textures, fonts...
+		// If configPath = "" then nothing is trying to load
 		State(const std::string & resourceCacheConfig);
 		~State();
 
+		// Sets window pointer 
+		// window - pointer to sf::RenderWindow
 		void SetWindowPointer(sf::RenderWindow * window);
+		// Runs state
 		// Returns -1 to exit or state id to switch
 		virtual short Run();
 

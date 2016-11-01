@@ -7,12 +7,13 @@ ce::StateMachine::StateMachine(unsigned short stateToStart)
 
 void ce::StateMachine::AddState(unsigned short id, State * state)
 {
+	CE_ASSERT(state, "State is nullptr");
+
 	for (auto it = m_states.begin(); it != m_states.end(); ++it)
 	{
 		if (it->first == id)
 		{
-			Logger::LogToFile("StateMachine: Cannot add state, found same state id!");
-			
+			Logger::LogToBoth("StateMachine: Cannot add state, found same state id! ID: " + std::to_string(id), Logger::MessageType::Error);
 			return;
 		}
 	}
@@ -22,12 +23,7 @@ void ce::StateMachine::AddState(unsigned short id, State * state)
 
 void ce::StateMachine::Run()
 {
-	if (!m_states.size())
-	{
-		Logger::LogToFile("StateMachine: Cannot run, no states!");
-		
-		return;
-	}
+	CE_ASSERT(m_states.size(), "cannot run StateMachine, no states");
 
 	int nextState = 0;
 	bool stateFound = false;
@@ -51,10 +47,9 @@ void ce::StateMachine::Run()
 
 			if (!stateFound)
 			{
-				Logger::LogToFile("StateMachine: Cannot switch states, switching to " + std::to_string(m_currentState) + "!");
-				
-				// Pooping to menu or somewhere
-				m_currentState = 1;
+				m_currentState = 0;
+
+				Logger::LogToFile("StateMachine: Cannot switch states, switching to " + std::to_string(m_currentState) + "!", Logger::MessageType::Warning);
 			}
 		}
 	}

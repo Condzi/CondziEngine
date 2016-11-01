@@ -9,9 +9,11 @@
 
 namespace ce
 {
+	// Resource Cache (storage) for:
 	// - Textures
 	// - Fonts
 	// - SoundBuffers
+	// - Musics
 	class ResourceCache
 	{
 	private:
@@ -21,12 +23,22 @@ namespace ce
 		void loadMusic(std::string & configFilePath);
 
 	public:
-		// configFilePath - path to cfg file with paths to textures, fonts and sound buffers
+		// ResourceCache constructor (not default)
+		// configFilePath - path to cfg file with paths to textures, fonts...
+		// If configPath = "" then nothing is trying to load.
 		ResourceCache(const std::string & configFilePath);
 
+		// Returns const reference to sf::Texture
+		// key	- texture name
 		const sf::Texture & GetTexture(const std::string & key);
+		// Returns const reference to sf::Font
+		// key	- font name
 		const sf::Font & GetFont(const std::string & key);
+		// Returns const reference to sf::SoundBuffer
+		// key	- sound buffer name
 		const sf::SoundBuffer & GetSoundBuffer(const std::string & key);
+		// Returns reference to sf::Music, please be carefoul with editing it.
+		// key	- music name
 		sf::Music & GetMusic(const std::string & key);
 
 	private:

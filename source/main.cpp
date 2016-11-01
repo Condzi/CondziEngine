@@ -8,22 +8,21 @@ int main()
 {
 	try
 	{
+		////for (unsigned i = 0; i < 100; ++i)
+		////{
+		////	std::cout << ce::Random::Value(-10.f, 10.f);
+		////	std::cin.get();
+		////}
 
-		for (unsigned i = 0; i < 100; ++i)
-		{
-			std::cout << ce::Random::Value(-10.f, 10.f);
-			std::cin.get();
-		}
+		sf::err().rdbuf(0);
 
-		////sf::err().rdbuf(0);
+		PlayState ps("resources/playState.config");
+		//PlayState ps("");
 
-		//PlayState ps("resources/playState.config");
-		////PlayState ps("");
-
-		//ce::Game game;
-		//game.AddState(1, &ps);
-		//
-		//game.Run();
+		ce::Game game(sf::Vector2u(1280, 720), "Conine", 60);
+		game.AddState(0, &ps);
+		
+		game.Run();
 	}
 	catch (std::runtime_error & rm)
 	{
