@@ -1,7 +1,7 @@
 #pragma once
-#include <SFML/Graphics/RenderWindow.hpp>
 #include "Engine/Assert.hpp"
 #include "Engine/Managing/ResourceCache.hpp"
+#include <SFML/Graphics/RenderWindow.hpp>
 
 namespace ce
 {

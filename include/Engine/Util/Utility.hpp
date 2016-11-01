@@ -1,7 +1,7 @@
 #pragma once
+#include "Engine/Assert.hpp"
 #include <random>
 #include <ctime>
-#include "Engine/Assert.hpp"
 
 namespace ce
 {

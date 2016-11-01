@@ -1,11 +1,10 @@
 #pragma once
-#include <map>
+#include "Engine/Logger/Logger.hpp"
+#include "Engine/ConfigFileReader/ConfigFile.hpp"
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Music.hpp>
-#include "Engine/Logger/Logger.hpp"
-#include "Engine/ConfigFileReader/ConfigFile.hpp"
 
 namespace ce
 {

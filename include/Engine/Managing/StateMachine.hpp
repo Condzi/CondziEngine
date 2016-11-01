@@ -1,7 +1,5 @@
 #pragma once
-#include <map>
 #include "Engine/Managing/State.hpp"
-#include "Engine/Assert.hpp"
 
 namespace ce
 {

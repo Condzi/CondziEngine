@@ -1,6 +1,5 @@
 #include "Engine/ConfigFileReader/ConfigFile.hpp"
 
-
 bool ConfigFile::parsePrecheck()
 {
 	// 1 - name, 2 - opening bracket, 3 - closing bracket 

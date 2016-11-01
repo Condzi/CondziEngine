@@ -1,7 +1,6 @@
 #pragma once
-#include <iostream>
 #include "Engine/Managing/StateMachine.hpp"
-#include "Engine/Assert.hpp"
+#include <iostream>
 
 namespace ce
 {

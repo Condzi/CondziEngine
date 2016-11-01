@@ -1,11 +1,11 @@
 #pragma once
+#include "Engine/Managing/State.hpp"
 #include <SFML/Audio/Sound.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Window/Event.hpp>
 #include <chrono>
 #include <random>
-#include "Engine/Managing/State.hpp"
 
 class PlayState :
 	public ce::State

@@ -1,6 +1,5 @@
 #include "Engine/Logger/Logger.hpp"
 
-
 void ce::Logger::LogToFile(const std::string & msg, MessageType type)
 {
 #ifdef _DEBUG_
