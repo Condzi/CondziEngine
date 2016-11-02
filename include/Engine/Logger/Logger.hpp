@@ -10,11 +10,6 @@ namespace ce
 {
 	namespace Logger
 	{
-		namespace
-		{
-			static unsigned int msgCounter = 0;
-		}
-
 		// Message type
 		enum class MessageType
 		{
@@ -39,8 +34,10 @@ namespace ce
 		void Log(const std::string & msg, MessageType type, Output output);
 
 		// Internal log methods
-		namespace internal
+		namespace LoggerInternal
 		{
+			static unsigned int messageCounter = 0;
+
 			// Saves message to log.txt file.
 			// msg	- message
 			// type - type of message (error, warning, info)

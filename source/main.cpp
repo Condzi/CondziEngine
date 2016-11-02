@@ -1,6 +1,6 @@
 #include <SFML/System/Err.hpp>
 #include "Engine/Util/Game.hpp"
-#include "Engine/Util/Utility.hpp"
+#include "Engine/Util/Random.hpp"
 #include "Pong/States/PlayState.hpp"
 
 

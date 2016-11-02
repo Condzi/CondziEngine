@@ -7,23 +7,23 @@ void ce::Logger::Log(const std::string & msg, MessageType type, Output output)
 	switch (output)
 	{
 	case ce::Logger::Output::All:
-		internal::logToConsole(msg, type);
+		LoggerInternal::logToConsole(msg, type);
 		// To make id in file and console match
-		--msgCounter;
-		internal::logToFile(msg, type);
+		--LoggerInternal::messageCounter;
+		LoggerInternal::logToFile(msg, type);
 		break;
 	case ce::Logger::Output::File:
-		internal::logToFile(msg, type);
+		LoggerInternal::logToFile(msg, type);
 		break;
 	case ce::Logger::Output::Console:
-		internal::logToConsole(msg, type);
+		LoggerInternal::logToConsole(msg, type);
 		break;
 	}
 
 #endif // _DEBUG_
 }
 
-void ce::Logger::internal::logToFile(const std::string & msg, MessageType type)
+void ce::Logger::LoggerInternal::logToFile(const std::string & msg, MessageType type)
 {
 #ifdef _DEBUG_
 
@@ -47,14 +47,14 @@ void ce::Logger::internal::logToFile(const std::string & msg, MessageType type)
 		logFile.open("log.txt", std::ios::app);
 	}
 
-	logFile << "[" << prefix <<"] " << msgCounter << ": "<< msg << "\n";
+	logFile << "[" << prefix <<"] " << messageCounter << ": "<< msg << "\n";
 
-	++msgCounter;
+	++messageCounter;
 
 #endif
 }
 
-void ce::Logger::internal::logToConsole(const std::string & msg, MessageType type)
+void ce::Logger::LoggerInternal::logToConsole(const std::string & msg, MessageType type)
 {
 #ifdef _DEBUG_
 
@@ -68,9 +68,9 @@ void ce::Logger::internal::logToConsole(const std::string & msg, MessageType typ
 	case MessageType::Info:			prefix = 'i'; break;
 	}
 
-	std::cout << "[" << prefix << "] " << msgCounter << ": " << msg << "\n";
+	std::cout << "[" << prefix << "] " << messageCounter << ": " << msg << "\n";
 	
-	++msgCounter;
+	++messageCounter;
 
 #endif
 }
