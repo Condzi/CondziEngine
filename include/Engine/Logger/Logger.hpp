@@ -29,7 +29,7 @@ namespace ce
 
 		// Saves message to specified output.
 		// msg		- message
-		// type		- type of message (error, warning, info)
+		// type		- type of message (assert error, error, warning, info)
 		// output	- where save message
 		void Log(const std::string & msg, MessageType type, Output output);
 

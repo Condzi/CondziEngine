@@ -130,6 +130,8 @@ PlayState::PlayState(const std::string & reosurceCacheConfig) : State(reosurceCa
 
 short PlayState::Run()
 {
+	this->State::Run();
+
 	setResources();
 	resetPositions();
 	randBallVelocityVector();

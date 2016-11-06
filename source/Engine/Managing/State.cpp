@@ -20,4 +20,7 @@ void ce::State::SetWindowPointer(sf::RenderWindow * window)
 short ce::State::Run()
 {
 	CE_ASSERT(m_window, "window is nullptr, window pointer not set");
+	// This value doesn't matter because State::Run() should be called in 
+	// Child class
+	return -1;
 }

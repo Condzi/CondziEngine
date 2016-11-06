@@ -19,6 +19,7 @@ namespace ce
 		// Sets window pointer 
 		// window - pointer to sf::RenderWindow
 		void SetWindowPointer(sf::RenderWindow * window);
+		// It is recommended to call this->State::Run() before everything in CustomState::Run()
 		// Runs state
 		// Returns -1 to exit or state id to switch
 		virtual short Run();
