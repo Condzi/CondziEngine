@@ -24,6 +24,6 @@ do \
     } \
 }while (false)
 
-#endif // _DEBUG_
-
+#else
 #define CE_ASSERT(condition, message)
+#endif // _DEBUG_

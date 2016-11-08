@@ -1,5 +1,6 @@
 #pragma once
 
+// Defined in Logger.hpp
 #define _DEBUG_
 
 #include <iostream>

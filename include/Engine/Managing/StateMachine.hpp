@@ -13,9 +13,13 @@ namespace ce
 		// StateMachine constructor (default)
 		// stateToStart = 0	- number of state to start
 		StateMachine(unsigned short stateToStart = 0);
-
+		~StateMachine();
+		//Add State to StateMachine with specified id
+		// Usage: stateMachine.addState((int)StateEnums::MenuState, new MenuState("resrc/menu.config"))
+		// id		- id of state (cannot be the same as added previous)
+		// state	- state pointer 
 		void AddState(unsigned short id, State * state);
-
+		// Runs state machine
 		void Run();
 
 	private:

@@ -16,11 +16,8 @@ int main()
 
 		sf::err().rdbuf(0);
 
-		PlayState ps("resources/playState.config");
-		//PlayState ps("");
-
 		ce::Game game(sf::Vector2u(1280, 720), "Conine", 60);
-		game.AddState(0, &ps);
+		game.AddState(0, new PlayState("resources/playState.config"));
 		
 		game.Run();
 	}

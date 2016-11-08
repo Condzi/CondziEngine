@@ -5,6 +5,18 @@ ce::StateMachine::StateMachine(unsigned short stateToStart)
 	m_currentState = stateToStart;
 }
 
+ce::StateMachine::~StateMachine()
+{
+	Logger::Log("StateMachine: (destructor) trying to delete " + std::to_string(m_states.size()) + " states", Logger::MessageType::Info, Logger::Output::File);
+
+	for (auto it = m_states.begin(); it != m_states.end(); ++it)
+	{
+		delete it->second;
+	}
+	
+	Logger::Log("StateMaching: (destructor) StateMachine deleted", Logger::MessageType::Info, Logger::Output::File);
+}
+
 void ce::StateMachine::AddState(unsigned short id, State * state)
 {
 	CE_ASSERT(state, "State is nullptr");
