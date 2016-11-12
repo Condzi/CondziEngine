@@ -1,7 +1,9 @@
 #include <SFML/System/Err.hpp>
 #include "Engine/Util/Game.hpp"
 #include "Engine/Util/Random.hpp"
-#include "Pong/States/PlayState.hpp"
+//#include "Engine/Managing/ResourceCache.hpp"
+#include "Engine/Managing/NewResourceCache.hpp"
+//#include "Pong/States/PlayState.hpp"
 
 
 int main()
@@ -16,10 +18,18 @@ int main()
 
 		sf::err().rdbuf(0);
 
-		ce::Game game(sf::Vector2u(1280, 720), "Conine", 60);
-		game.AddState(0, new PlayState("resources/playState.config"));
-		
-		game.Run();
+		ce::NewResourceCache<char> a;
+
+		a.AddResource(new char, "intowski");
+		std::cout << *a.GetResource("intowski");
+		a.DeleteResource("intowski");
+
+		std::cin.get();	
+
+		//ce::Game game(sf::Vector2u(1280, 720), "Conine", 60);
+		//game.AddState(0, new PlayState("resources/playState.config"));
+		//
+		//game.Run();
 	}
 	catch (std::runtime_error & rm)
 	{
