@@ -2,10 +2,17 @@
 #include "Engine/Util/Game.hpp"
 #include "Engine/Util/Random.hpp"
 //#include "Engine/Managing/ResourceCache.hpp"
-#include "Engine/Managing/NewResourceCache.hpp"
+#include "Engine/Managing/CustomResourceCache.hpp"
 //#include "Pong/States/PlayState.hpp"
 
 
+class C
+{
+public:
+	C() {}
+
+	bool LoadFromFile(std::string a) { return true; }
+};
 int main()
 {
 	try
@@ -17,12 +24,11 @@ int main()
 		////}
 
 		sf::err().rdbuf(0);
-
-		ce::NewResourceCache<char> a;
-
-		a.AddResource(new char, "intowski");
-		std::cout << *a.GetResource("intowski");
-		a.DeleteResource("intowski");
+		
+		ce::CustomResourceCache<C> custom("data/", "TEST");
+		C c;
+		custom.Add(c, "pupa");
+		custom.Get("pupa");
 
 		std::cin.get();	
 
