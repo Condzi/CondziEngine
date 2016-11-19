@@ -5,14 +5,6 @@
 #include "Engine/Managing/CustomResourceCache.hpp"
 //#include "Pong/States/PlayState.hpp"
 
-
-class C
-{
-public:
-	C() {}
-
-	bool LoadFromFile(std::string a) { return true; }
-};
 int main()
 {
 	try
@@ -25,13 +17,6 @@ int main()
 
 		sf::err().rdbuf(0);
 		
-		ce::CustomResourceCache<C> custom("data/", "TEST");
-		C c;
-		custom.Add(c, "pupa");
-		custom.Get("pupa");
-
-		std::cin.get();	
-
 		//ce::Game game(sf::Vector2u(1280, 720), "Conine", 60);
 		//game.AddState(0, new PlayState("resources/playState.config"));
 		//
