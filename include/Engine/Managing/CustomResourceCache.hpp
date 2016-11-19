@@ -15,15 +15,23 @@ namespace ce
 		bool load(const std::string & configFilePath);
 
 	public:
+		// Custom Resource Cache constructor (not default)
+		// cfgFile - file to config file
+		// tag - tag that it looks for in config file
 		CustomResourceCache(const std::string & cfgFile, const std::string & tag);
 
 		// You probably don't need this method... 
 		// *You should load EVERYTHING from config files!*
+		// resource - resource
+		// key - resource name
+		// returns reference to resource
 		T& Add(const T & resource, const std::string & key);
-		// Reloads resources, returns false if failed
+		// Reloads resources 
+		// returns false if failed
 		bool Reload();
 		// Returns reference to resource
 		// If cannot find returns placeholder
+		// key - resource name
 		T& Get(const std::string & key);
 
 	private:
