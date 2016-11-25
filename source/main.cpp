@@ -3,7 +3,18 @@
 #include "Engine/Util/Random.hpp"
 //#include "Engine/Managing/ResourceCache.hpp"
 #include "Engine/Managing/CustomResourceCache.hpp"
+#include "Engine/Entity/Entity.hpp"
+#include "Engine/Entity/EntityHolder.hpp"
 //#include "Pong/States/PlayState.hpp"
+
+
+class A :
+	public ce::Component
+{
+public:
+	A() {}
+
+};
 
 int main()
 {
@@ -15,7 +26,20 @@ int main()
 		////	std::cin.get();
 		////}
 
+		ce::EntityHolder eh;
+
+		eh.AddEntity()->SetName("MyEntity1");
+		eh.AddEntity()->SetName("MySecondEntity");
+		std::cout << eh.HasEntity("MyEntity1") << "\n";
+
+		std::cout << eh.RemoveEntity("MyEntity1") << "\n";
+		std::cout << eh.GetEntity("MySecondEntity")->GetID();
+
+		
+
 		sf::err().rdbuf(0);
+
+		std::cin.get();
 		
 		//ce::Game game(sf::Vector2u(1280, 720), "Conine", 60);
 		//game.AddState(0, new PlayState("resources/playState.config"));

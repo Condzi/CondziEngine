@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine/Assert.hpp"
+#include "Engine/Entity/EntityHolder.hpp"
 #include "Engine/Managing/ResourceCache.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 
@@ -26,6 +27,7 @@ namespace ce
 
 	protected:
 		sf::RenderWindow * m_window;
+		EntityHolder m_entityHolder;
 
 		ResourceCache * m_resourceCache;
 	};
