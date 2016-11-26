@@ -17,22 +17,6 @@ ce::StateMachine::~StateMachine()
 	Logger::Log("StateMaching: (destructor) StateMachine deleted", Logger::MessageType::Info, Logger::Output::File);
 }
 
-void ce::StateMachine::AddState(unsigned short id, State * state)
-{
-	CE_ASSERT(state, "State is nullptr");
-
-	for (auto it = m_states.begin(); it != m_states.end(); ++it)
-	{
-		if (it->first == id)
-		{
-			Logger::Log("StateMachine: Cannot add state, found same state id! ID: " + std::to_string(id), Logger::MessageType::Error, Logger::Output::All);
-			return;
-		}
-	}
-
-	m_states[id] = state;
-}
-
 void ce::StateMachine::Run()
 {
 	CE_ASSERT(m_states.size(), "cannot run StateMachine, no states");
@@ -42,10 +26,13 @@ void ce::StateMachine::Run()
 
 	while (nextState != -1)
 	{
+		m_states[m_currentState]->onActivation();
 		nextState = m_states[m_currentState]->Run();
 
 		if (nextState != m_currentState)
 		{
+			m_states[m_currentState]->onDeactivation();
+
 			stateFound = false;
 			for (auto it = m_states.begin(); it != m_states.end(); ++it)
 			{

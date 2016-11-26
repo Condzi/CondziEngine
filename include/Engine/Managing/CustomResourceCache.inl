@@ -50,6 +50,8 @@ inline bool ce::CustomResourceCache<T>::load(const std::string & configFilePath)
 
 		m_resources[tempName].LoadFromFile(cfg.GetData("path" + std::to_string(counter)));
 	}
+
+	return true;
 }
 
 template< class T >
@@ -60,7 +62,7 @@ inline ce::CustomResourceCache<T>::CustomResourceCache(const std::string & cfgFi
 }
 
 template<class T>
-inline T & ce::CustomResourceCache<T>::Add(const T & resource, const std::string & key)
+inline T * ce::CustomResourceCache<T>::Add(const T & resource, const std::string & key)
 {
 	if(m_resources.find(key) != m_resources.end())
 	{
@@ -69,7 +71,7 @@ inline T & ce::CustomResourceCache<T>::Add(const T & resource, const std::string
 
 	m_resources[key] = resource;
 	
-	return m_resources[key];
+	return &m_resources[key];
 }
 
 template<class T>
@@ -102,14 +104,14 @@ inline bool ce::CustomResourceCache<T>::Reload()
 }
 
 template<class T>
-inline T & ce::CustomResourceCache<T>::Get(const std::string & key)
+inline T * ce::CustomResourceCache<T>::Get(const std::string & key)
 {
 	if (m_resources.find(key) == m_resources.end())
 	{
-		Logger::Log("CustomResourceCache: Cannot find '" + key + "'", Logger::MessageType::Error, Logger::Output::All);
-		
-		return m_placeholder;
+		Logger::Log("CustomResourceCache: Cannot find '" + key + "'", Logger::MessageType::Error, Logger::Output::All);	
+	
+		return nullptr
 	}
 
-	return m_resources[key];
+	return &m_resources[key];
 }

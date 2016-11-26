@@ -25,21 +25,20 @@ namespace ce
 		// resource - resource
 		// key - resource name
 		// returns reference to resource
-		T& Add(const T & resource, const std::string & key);
+		T * Add(const T & resource, const std::string & key);
 		// Reloads resources 
 		// returns false if failed
 		bool Reload();
 		// Returns reference to resource
 		// If cannot find returns placeholder
 		// key - resource name
-		T& Get(const std::string & key);
+		T * Get(const std::string & key);
 
 	private:
 		std::string m_configFile;
 		std::string m_tag;
 	
 		std::map< std::string, T > m_resources;
-		T m_placeholder;
 	};
 
 }

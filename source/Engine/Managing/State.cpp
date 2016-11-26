@@ -1,5 +1,13 @@
 #include "Engine/Managing/State.hpp"
 
+void ce::State::onActivation()
+{
+}
+
+void ce::State::onDeactivation()
+{
+}
+
 ce::State::State(const std::string & resourceCacheConfig)
 {
 	m_window = nullptr;

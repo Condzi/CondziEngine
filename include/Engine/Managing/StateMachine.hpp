@@ -9,16 +9,35 @@ namespace ce
 	// Usually staring state number - 0
 	class StateMachine
 	{
+		friend class Game;
+
 	public:
 		// StateMachine constructor (default)
 		// stateToStart = 0	- number of state to start
 		StateMachine(unsigned short stateToStart = 0);
 		~StateMachine();
 		//Add State to StateMachine with specified id
-		// Usage: stateMachine.addState((int)StateEnums::MenuState, new MenuState("resrc/menu.config"))
-		// id		- id of state (cannot be the same as added previous)
-		// state	- state pointer 
-		void AddState(unsigned short id, State * state);
+		// Usage: stateMachine.AddState< MenuState >((int)StateEnums::MenuState, "resrc/menu.config")
+		// id						- id of state (cannot be the same as added previous)
+		// resourceCachePath		- path to resource cache
+		template<class T>
+		inline void AddState(unsigned short id, const std::string & resourceCachePath)
+		{
+			static_assert(std::is_base_of<State, T>::value, "State is not base of T");
+
+			for (auto it = m_states.begin(); it != m_states.end(); ++it)
+			{
+				if (it->first == id)
+				{
+					Logger::Log("StateMachine: Cannot add state, found same state id! ID: " + std::to_string(id), Logger::MessageType::Error, Logger::Output::All);
+
+					return;
+				}
+			}
+
+			m_states[id] = new T(resourceCachePath);
+		}		
+		
 		// Runs state machine
 		void Run();
 

@@ -6,10 +6,18 @@
 
 namespace ce
 {
-	// Virtual class Sate
+	// Virtual class State
 	// Inherit from it if you want to create State for Game
+	// Methods to override:
+	// void onActivation()
+	// void onDeactivation()
 	class State
 	{
+		friend class StateMachine;
+	private:
+		void onActivation();
+		void onDeactivation();
+
 	public:
 		// State constructor (not default)
 		// resourceCacheConfig - path to cfg file with paths to textures, fonts...

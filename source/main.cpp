@@ -5,7 +5,7 @@
 #include "Engine/Managing/CustomResourceCache.hpp"
 #include "Engine/Entity/Entity.hpp"
 #include "Engine/Entity/EntityHolder.hpp"
-//#include "Pong/States/PlayState.hpp"
+#include "Pong/States/PlayState.hpp"
 
 
 class A :
@@ -20,31 +20,10 @@ int main()
 {
 	try
 	{
-		////for (unsigned i = 0; i < 100; ++i)
-		////{
-		////	std::cout << ce::Random::Value(-10.f, 10.f);
-		////	std::cin.get();
-		////}
+		ce::Game game(sf::Vector2u(1280, 720), "Conine", 60);
+		game.AddState<PlayState>(0, "resources/playState.config");
 
-		ce::EntityHolder eh;
-
-		eh.AddEntity()->SetName("MyEntity1");
-		eh.AddEntity()->SetName("MySecondEntity");
-		std::cout << eh.HasEntity("MyEntity1") << "\n";
-
-		std::cout << eh.RemoveEntity("MyEntity1") << "\n";
-		std::cout << eh.GetEntity("MySecondEntity")->GetID();
-
-		
-
-		sf::err().rdbuf(0);
-
-		std::cin.get();
-		
-		//ce::Game game(sf::Vector2u(1280, 720), "Conine", 60);
-		//game.AddState(0, new PlayState("resources/playState.config"));
-		//
-		//game.Run();
+		game.Run();
 	}
 	catch (std::runtime_error & rm)
 	{

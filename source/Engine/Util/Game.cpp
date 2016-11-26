@@ -6,13 +6,6 @@ ce::Game::Game(sf::Vector2u screenSize, const std::string & title, unsigned fram
 	m_window.setFramerateLimit(framerateLimit);
 }
 
-void ce::Game::AddState(unsigned short id, State * state)
-{
-	m_stateMachine.AddState(id, state);
-	state->SetWindowPointer(&m_window);
-}
-
-
 void ce::Game::Run()
 {	
 	Logger::Log("\n=====\nStarting Game\n=====", Logger::MessageType::Info, Logger::Output::All);
