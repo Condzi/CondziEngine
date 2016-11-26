@@ -25,7 +25,7 @@ namespace ce
 			m_stateMachine.AddState<T>(id, resourceCachePath);
 			m_stateMachine.m_states[id]->SetWindowPointer(&m_window);
 		}
-		// Runs Game.
+		// Runs Game
 		void Run();
 
 	private:

@@ -14,6 +14,7 @@ namespace ce
 	class State
 	{
 		friend class StateMachine;
+
 	private:
 		void onActivation();
 		void onDeactivation();

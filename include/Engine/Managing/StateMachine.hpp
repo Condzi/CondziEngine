@@ -16,7 +16,7 @@ namespace ce
 		// stateToStart = 0	- number of state to start
 		StateMachine(unsigned short stateToStart = 0);
 		~StateMachine();
-		//Add State to StateMachine with specified id
+		// Add State to StateMachine with specified id
 		// Usage: stateMachine.AddState< MenuState >((int)StateEnums::MenuState, "resrc/menu.config")
 		// id						- id of state (cannot be the same as added previous)
 		// resourceCachePath		- path to resource cache
