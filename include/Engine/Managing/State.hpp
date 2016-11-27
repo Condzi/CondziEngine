@@ -11,6 +11,8 @@ namespace ce
 	// Methods to override:
 	// void onActivation()
 	// void onDeactivation()
+	// **** MUST TO OVERRIDE
+	// short Run()
 	class State
 	{
 		friend class StateMachine;
@@ -24,7 +26,7 @@ namespace ce
 		// resourceCacheConfig - path to cfg file with paths to textures, fonts...
 		// If configPath = "" then nothing is trying to load
 		State(const std::string & resourceCacheConfig);
-		~State();
+		virtual ~State();
 
 		// Sets window pointer 
 		// window - pointer to sf::RenderWindow

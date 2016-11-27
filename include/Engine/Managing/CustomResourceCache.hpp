@@ -8,7 +8,7 @@ namespace ce
 {
 	// Resource Cache for custom resource
 	// It must have method "bool LoadFromFile(path)" !
-	template< class T >
+	template<class T>
 	class CustomResourceCache
 	{
 	private:
@@ -16,9 +16,19 @@ namespace ce
 
 	public:
 		// Custom Resource Cache constructor (not default)
-		// cfgFile - file to config file
-		// tag - tag that it looks for in config file
+		// cfgFile	- path to config file
+		// tag		- tag that it looks for in config file
 		CustomResourceCache(const std::string & cfgFile, const std::string & tag);
+
+		// Returns tag that it looks for in config file
+		std::string GetTag();
+
+		// Sets tag
+		// tag - tag that it looks for in config file
+		void SetTag(const std::string & tag);
+		// Sets config file path
+		// cfgFile - path to config file
+		void SetConfigFilePath(const std::string & cfgFile);
 
 		// You probably don't need this method... 
 		// *You should load EVERYTHING from config files!*

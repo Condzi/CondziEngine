@@ -17,8 +17,9 @@ namespace ce
 	class Component :
 		public sf::Drawable
 	{
-	private:
 		friend class Entity;
+
+	private:
 
 		virtual void onCreate();
 		virtual void onDelete();
@@ -32,6 +33,7 @@ namespace ce
 		Component();
 		virtual ~Component() = default;
 
+		// Returns entity that component is attached to
 		Entity& GetEntityAttachedTo();
 
 	private:

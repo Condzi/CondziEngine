@@ -1,7 +1,6 @@
 #include <SFML/System/Err.hpp>
 #include "Engine/Util/Game.hpp"
 
-
 int main()
 {
 	sf::err().rdbuf(0);

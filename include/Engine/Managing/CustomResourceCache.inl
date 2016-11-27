@@ -62,6 +62,24 @@ inline ce::CustomResourceCache<T>::CustomResourceCache(const std::string & cfgFi
 }
 
 template<class T>
+inline std::string ce::CustomResourceCache<T>::GetTag()
+{
+	return m_tag;
+}
+
+template<class T>
+inline void ce::CustomResourceCache<T>::SetTag(const std::string & tag)
+{
+	m_tag = tag;
+}
+
+template<class T>
+inline void ce::CustomResourceCache<T>::SetConfigFilePath(const std::string & cfgFile)
+{
+	m_configFile = cfgFile;
+}
+
+template<class T>
 inline T * ce::CustomResourceCache<T>::Add(const T & resource, const std::string & key)
 {
 	if(m_resources.find(key) != m_resources.end())

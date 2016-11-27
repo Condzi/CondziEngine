@@ -14,6 +14,7 @@ namespace ce
 		public sf::Drawable
 	{
 		friend class EntityHolder;
+
 	private:
 		void draw(sf::RenderTarget & target, sf::RenderStates states) const;
 

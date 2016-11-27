@@ -6,8 +6,8 @@ namespace ce
 	// State Machine
 	// (used by Game class)
 	// Starting state should be Menu 
-	// Usually staring state number - 0
-	class StateMachine
+	// Usually starting state number - 0
+	class StateMachine final
 	{
 		friend class Game;
 
