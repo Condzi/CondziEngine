@@ -31,6 +31,8 @@ namespace ce
 		std::string GetName();
 		// Returns unique ID of entity
 		unsigned int GetID();
+		// Returns Entity Holder that entity is attached
+		EntityHolder* GetEntityHolderAttachedTo();
 		// Returns true if sleeping
 		bool IsSleeping();
 		// Invokes Entity if sleeps
@@ -179,6 +181,8 @@ namespace ce
 		std::string m_name;
 		unsigned int m_id;
 		bool m_isSleeping;
+
+		EntityHolder * m_holderAttachedTo;
 
 	};
 }

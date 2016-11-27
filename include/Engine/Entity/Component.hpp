@@ -20,7 +20,6 @@ namespace ce
 		friend class Entity;
 
 	private:
-
 		virtual void onCreate();
 		virtual void onDelete();
 		virtual void onSleep();
@@ -34,7 +33,7 @@ namespace ce
 		virtual ~Component() = default;
 
 		// Returns entity that component is attached to
-		Entity& GetEntityAttachedTo();
+		Entity * GetEntityAttachedTo();
 
 	private:
 		Entity * m_entityAttachedTo;

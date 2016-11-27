@@ -31,6 +31,8 @@ namespace ce
 		// Returns false if cannot find 
 		// name - entity name
 		bool RemoveEntity(const std::string & name);
+		// Removes all Entities from Holder
+		void RemoveAll();
 		// Sleeps all Entities in Holder
 		void SleepAll();
 		// Invokes all Entities in Holder
@@ -39,6 +41,10 @@ namespace ce
 		// Updates all entities
 		// deltaTime - frame time or delta time
 		void UpdateAll(float deltaTime);
+
+		Entity& operator[](unsigned int index);
+		// Returns amount of entities
+		unsigned int GetSize();
 
 	private:
 		std::vector< Entity > m_entities;

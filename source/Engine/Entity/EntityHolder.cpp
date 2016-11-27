@@ -42,6 +42,7 @@ ce::Entity * ce::EntityHolder::GetEntity(unsigned int id)
 ce::Entity * ce::EntityHolder::AddEntity()
 {
 	m_entities.resize(m_entities.size() + 1);
+	m_entities[m_entities.size() - 1].m_holderAttachedTo = this;
 
 	return &m_entities[m_entities.size() - 1];
 }
@@ -61,6 +62,13 @@ bool ce::EntityHolder::RemoveEntity(const std::string & name)
 	return false;
 }
 
+void ce::EntityHolder::RemoveAll()
+{
+	Logger::Log("EntityHolder: Removed " + std::to_string(m_entities.size()) + " Entities", ce::Logger::MessageType::Info, ce::Logger::Output::All);
+	
+	m_entities.clear();
+}
+
 void ce::EntityHolder::SleepAll()
 {
 	for (auto & c : m_entities)
@@ -77,4 +85,14 @@ void ce::EntityHolder::UpdateAll(float deltaTime)
 {
 	for (auto & c : m_entities)
 		c.Update(deltaTime);
+}
+
+ce::Entity & ce::EntityHolder::operator[](unsigned int index)
+{
+	return m_entities[index];
+}
+
+unsigned int ce::EntityHolder::GetSize()
+{
+	return m_entities.size();
 }

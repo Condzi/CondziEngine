@@ -15,6 +15,7 @@ ce::Entity::Entity()
 	m_name = "(Unnamed)";
 	m_position = sf::Vector2f(0, 0);
 	m_isSleeping = false;
+	m_holderAttachedTo = nullptr;
 }
 
 ce::Entity::~Entity()
@@ -69,6 +70,11 @@ std::string ce::Entity::GetName()
 unsigned int ce::Entity::GetID()
 {
 	return m_id;
+}
+
+ce::EntityHolder * ce::Entity::GetEntityHolderAttachedTo()
+{
+	return m_holderAttachedTo;
 }
 
 bool ce::Entity::IsSleeping()

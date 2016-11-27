@@ -19,7 +19,7 @@ do \
     { \
         std::stringstream ss; \
         ss << "Assertion failed in: '" << __FILE__ << "'\nFunction: `" << __func__ << "`\nLine: " << __LINE__ << "\nCondition: '"<< #condition <<"'\nMessage: '"<< message <<"'"; \
-        Logger::Log(ss.str(), ce::Logger::MessageType::AssertError,  Logger::Output::All); \
+        Logger::Log(ss.str(), ce::Logger::MessageType::AssertError,  ce::Logger::Output::All); \
         abort(); \
     } \
 }while (false)
