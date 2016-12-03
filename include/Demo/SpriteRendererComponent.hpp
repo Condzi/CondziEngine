@@ -16,8 +16,9 @@ namespace demo
 	public:
 		SpriteRenderer();
 
-		void SetTexture(sf::Texture * texture);
+		void SetTexture(const sf::Texture * texture);
 		sf::Transformable & GetTransformable();
+		sf::FloatRect GetRect();
 		void SetLocalPosition(sf::Vector2f position);
 
 	private:

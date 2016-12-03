@@ -32,6 +32,11 @@ sf::Transformable & demo::SpriteRenderer::GetTransformable()
 	return m_sprite;
 }
 
+sf::FloatRect demo::SpriteRenderer::GetRect()
+{
+	return m_sprite.getGlobalBounds();
+}
+
 void demo::SpriteRenderer::SetLocalPosition(sf::Vector2f position)
 {
 	m_localPosition = position;

@@ -15,12 +15,13 @@ namespace demo
 	public:
 		SimpleCollider();
 
-		sf::FloatRect GetBounds();
+		sf::FloatRect GetRect();
 		bool IsCollision();
 
 		void SetSize(sf::Vector2f size);
 		// Sets position relative to Entity position
 		void SetLocalPosition(sf::Vector2f position);
+		void SetRect(const sf::FloatRect & rect);
 
 	private:
 		sf::FloatRect m_bounds;

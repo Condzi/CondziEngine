@@ -52,13 +52,16 @@ namespace ce
 		// frameTime - frame time or delta time
 		// If you want to draw it, simply use it like other SFML drawable
 		void Update(float frameTime);
+		// Removes all components
+		// Returns amount of components removed
+		void RemoveAllComponents();
 
 
 		// Adds component to entity
 		// Returns pointer to component or nullptr if failed (see debug log)
 		// Usasge: entity.AddComponent<AwesomeComponent>()->setAwesomeThing(1);
 		template<class T>
-		T* Entity::AddComponent()
+		T* AddComponent()
 		{
 			if (std::is_same<Component, T>())
 			{
@@ -96,7 +99,7 @@ namespace ce
 		// Returns pointer to component or nullptr if failed (see debug log)
 		// Usasge: entity.GetComponent<AwesomeComponent>()->setAwesomeThing(1);
 		template<class T>
-		T* Entity::GetComponent()
+		T* GetComponent()
 		{
 			if (std::is_same<Component, T>())
 			{
@@ -125,7 +128,7 @@ namespace ce
 		// Returns false if failed (see debug log)
 		// Usage: entity.RemoveComponent<AwesomeComponent>()
 		template<class T>
-		bool Entity::RemoveComponent()
+		bool RemoveComponent()
 		{
 			if (std::is_same<Component, T>())
 			{

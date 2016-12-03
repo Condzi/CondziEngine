@@ -47,6 +47,19 @@ void ce::Entity::Update(float frameTime)
 		c->update(frameTime);
 }
 
+void ce::Entity::RemoveAllComponents()
+{
+	for (auto * c : m_components)
+	{
+		// reason why onDelete is not calling here is 
+		// Entity is not deleted but component, and onDelete is called
+		// only when Entity is deleting
+		delete c;
+	}
+
+	m_components.clear();
+}
+
 void ce::Entity::SetName(const std::string & name)
 {
 	if (m_name == name)

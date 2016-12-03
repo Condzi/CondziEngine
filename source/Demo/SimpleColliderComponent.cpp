@@ -23,7 +23,12 @@ void demo::SimpleCollider::SetLocalPosition(sf::Vector2f position)
 	m_localPosition = position;
 }
 
-sf::FloatRect demo::SimpleCollider::GetBounds()
+void demo::SimpleCollider::SetRect(const sf::FloatRect & rect)
+{
+	m_bounds = rect;
+}
+
+sf::FloatRect demo::SimpleCollider::GetRect()
 {
 	return m_bounds;
 }

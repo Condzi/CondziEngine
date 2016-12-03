@@ -20,7 +20,7 @@ namespace ce
 		// id						- id of state (0 is stating state) (cannot be the same as added previous)
 		// resourceCachePath		- path to resource cache
 		template<class T>
-		inline void ce::Game::AddState(unsigned short id, const std::string & resourceCachePath)
+		void AddState(unsigned short id, const std::string & resourceCachePath)
 		{
 			m_stateMachine.AddState<T>(id, resourceCachePath);
 			m_stateMachine.m_states[id]->SetWindowPointer(&m_window);
