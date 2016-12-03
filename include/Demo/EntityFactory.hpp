@@ -20,7 +20,6 @@ namespace demo
 		// Makes car (player) entity
 		ce::Entity * MakeCar(ce::Entity * entity);
 		// Makes obstacle entity
-		// In future: (ObstacleType type)
 		ce::Entity * MakeObstacle(ce::Entity * entity);
 		// Makes terrain entity
 		ce::Entity * MakeTerrain(ce::Entity * entity);

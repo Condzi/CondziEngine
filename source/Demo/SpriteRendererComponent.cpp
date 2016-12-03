@@ -15,7 +15,7 @@ demo::SpriteRenderer::SpriteRenderer()
 	m_localPosition = sf::Vector2f(0, 0);
 }
 
-void demo::SpriteRenderer::SetTexture(sf::Texture * texture)
+void demo::SpriteRenderer::SetTexture(const sf::Texture * texture)
 {
 	if (texture)
 	{

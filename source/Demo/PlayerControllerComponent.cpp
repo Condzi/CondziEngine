@@ -23,3 +23,13 @@ sf::Vector2f demo::PlayerController::GetMovementForce()
 {
 	return m_movementForce;
 }
+
+void demo::PlayerController::SetMovementForce(sf::Vector2f movementForce)
+{
+	m_movementForce = movementForce;
+}
+
+void demo::PlayerController::AddForce(sf::Vector2f force)
+{
+	m_movementForce += force;
+}

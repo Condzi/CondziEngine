@@ -27,8 +27,8 @@ void demo::CollisionDetector::update(float deltaTime)
 			if(i == j)
 				continue;
 
-			rectA = simulators[i]->GetComponent<SimpleCollider>()->GetBounds();
-			rectB = simulators[j]->GetComponent<SimpleCollider>()->GetBounds();
+			rectA = simulators[i]->GetComponent<SimpleCollider>()->GetRect();
+			rectB = simulators[j]->GetComponent<SimpleCollider>()->GetRect();
 
 			if (simulators[i]->HasComponent<Velocity>())
 			{
@@ -52,4 +52,8 @@ void demo::CollisionDetector::update(float deltaTime)
 				simulators[j]->GetComponent<SimpleCollider>()->m_colided = true;
 			}
 		}
+}
+
+demo::CollisionDetector::CollisionDetector()
+{
 }

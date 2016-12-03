@@ -53,7 +53,6 @@ namespace ce
 		// If you want to draw it, simply use it like other SFML drawable
 		void Update(float frameTime);
 		// Removes all components
-		// Returns amount of components removed
 		void RemoveAllComponents();
 
 

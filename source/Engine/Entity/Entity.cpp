@@ -52,7 +52,7 @@ void ce::Entity::RemoveAllComponents()
 	for (auto * c : m_components)
 	{
 		// reason why onDelete is not calling here is 
-		// Entity is not deleted but component, and onDelete is called
+		// Entity is not deleting but component, and onDelete is called
 		// only when Entity is deleting
 		delete c;
 	}
