@@ -1,35 +1,43 @@
 #include "Engine/Entity/Component.hpp"
 
-void ce::Component::onCreate()
+void ce::BasicComponent::onCreate()
 {
 }
 
-void ce::Component::onDelete()
+void ce::BasicComponent::onDelete()
 {
 }
 
-void ce::Component::onSleep()
+void ce::BasicComponent::onSleep()
 {
 }
 
-void ce::Component::onInvoke()
+void ce::BasicComponent::onInvoke()
 {
 }
 
-void ce::Component::draw(sf::RenderTarget & target, sf::RenderStates states) const
+ce::BasicComponent::BasicComponent()
+{
+	m_entityAttachedTo = nullptr;
+}
+
+ce::Entity * ce::BasicComponent::GetEntityAttachedTo()
+{
+	return m_entityAttachedTo;
+}
+
+void ce::DrawableComponent::draw(sf::RenderTarget &, sf::RenderStates) const
 {
 }
 
-void ce::Component::update(float dt)
+void ce::UpdatebaleComponent::update(float)
+{
+}
+
+ce::UpdatebaleComponent::UpdatebaleComponent()
 {
 }
 
 ce::Component::Component()
 {
-	m_entityAttachedTo = nullptr;
-}
-
-ce::Entity * ce::Component::GetEntityAttachedTo()
-{
-	return m_entityAttachedTo;
 }

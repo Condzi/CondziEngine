@@ -4,18 +4,15 @@
 
 namespace ce
 {
-	// virtual class Component
-	// Inherit from it if you want to add Component to your Entity
-	// Be sure your class have default constructor!
-	// Methods to override: 
-	// void draw(sf::RenderTarget& target, sf::RenderStates states) const
-	// void update(float deltaTime)
+	// Basic Component class
+	// Be sure your component have default constructor!
+	// Methods for override:
+	// [private]
 	// void onCreate()
 	// void onDelete()
 	// void onSleep()
 	// void onInvoke()
-	class Component :
-		public sf::Drawable
+	class BasicComponent
 	{
 		friend class Entity;
 
@@ -24,19 +21,81 @@ namespace ce
 		virtual void onDelete();
 		virtual void onSleep();
 		virtual void onInvoke();
-		virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const;
-		virtual void update(float dt);
 
 	public:
-		// Component constructor (default)
+		BasicComponent();
+		virtual ~BasicComponent() = default;
+
+		ce::Entity * GetEntityAttachedTo();
+
+	private:
+		ce::Entity * m_entityAttachedTo;
+
+	};
+
+	// Drawable Component class
+	// Be sure your component have default constructor!
+	// Methods to override:
+	// [private]
+	// void draw(sf::RenderTarget &, sf::RenderStates) const
+	// void onCreate()
+	// void onDelete()
+	// void onSleep()
+	// void onInvoke()
+	class DrawableComponent :
+		public ce::BasicComponent,
+		public sf::Drawable
+	{
+		friend class Entity;
+		
+	private:
+		virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
+
+	public:
+		DrawableComponent();
+		virtual ~DrawableComponent() = default;
+	};
+
+	// Updatable Component class
+	// Be sure your component have default constructor!
+	// Methods to override:
+	// [private]
+	// void update(float)
+	// void onCreate()
+	// void onDelete()
+	// void onSleep()
+	// void onInvoke()
+	class UpdatebaleComponent :
+		public ce::BasicComponent
+	{
+		friend class Entity;
+
+	private:
+		virtual void update(float);
+
+	public:
+		UpdatebaleComponent();
+		virtual ~UpdatebaleComponent() = default;
+	};
+
+	// Component class (Updatable Component + Drawable Component )
+	// Be sure your component have default constructor!
+	// Methods to override:
+	// [private]
+	// void draw(sf::RenderTarget&, sf::RenderStates) const
+	// void update(float)
+	// void onCreate()
+	// void onDelete()
+	// void onSleep()
+	// void onInvoke()
+	class Component :
+		public ce::DrawableComponent,
+		public ce::UpdatebaleComponent
+	{
+		friend class Entity;
+
+	public:
 		Component();
 		virtual ~Component() = default;
-
-		// Returns entity that component is attached to
-		Entity * GetEntityAttachedTo();
-
-	protected:
-		Entity * m_entityAttachedTo;
-
 	};
 }
