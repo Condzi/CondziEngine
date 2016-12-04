@@ -30,11 +30,15 @@ void ce::DrawableComponent::draw(sf::RenderTarget &, sf::RenderStates) const
 {
 }
 
-void ce::UpdatebaleComponent::update(float)
+ce::DrawableComponent::DrawableComponent()
 {
 }
 
-ce::UpdatebaleComponent::UpdatebaleComponent()
+void ce::UpdateabaleComponent::update(float)
+{
+}
+
+ce::UpdateabaleComponent::UpdateabaleComponent()
 {
 }
 

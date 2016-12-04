@@ -65,7 +65,7 @@ namespace ce
 	// void onDelete()
 	// void onSleep()
 	// void onInvoke()
-	class UpdatebaleComponent :
+	class UpdateabaleComponent :
 		public ce::BasicComponent
 	{
 		friend class Entity;
@@ -74,8 +74,8 @@ namespace ce
 		virtual void update(float);
 
 	public:
-		UpdatebaleComponent();
-		virtual ~UpdatebaleComponent() = default;
+		UpdateabaleComponent();
+		virtual ~UpdateabaleComponent() = default;
 	};
 
 	// Component class (Updatable Component + Drawable Component )
@@ -90,7 +90,7 @@ namespace ce
 	// void onInvoke()
 	class Component :
 		public ce::DrawableComponent,
-		public ce::UpdatebaleComponent
+		public ce::UpdateabaleComponent
 	{
 		friend class Entity;
 

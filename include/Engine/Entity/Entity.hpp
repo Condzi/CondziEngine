@@ -67,34 +67,106 @@ namespace ce
 			if (std::is_same<Component, T>())
 			{
 				Logger::Log("Entity '" + m_name + "' (" + std::to_string(m_id) + "): Failed to add component, trying to add not inherited Component (T is Component type)", Logger::MessageType::Error, Logger::Output::All);
+			
+				return nullptr;
 			}
 
-			if (!std::is_base_of<Component, T>())
+			if (std::is_same<BasicComponent, T>())
 			{
-				Logger::Log("Entity '" + m_name + "' (" + std::to_string(m_id) + "): Failed to add component, 'Component' is not base of 'T'", Logger::MessageType::Error, Logger::Output::All);
+				Logger::Log("Entity '" + m_name + "' (" + std::to_string(m_id) + "): Failed to add component, trying to add not inherited Component (T is BasicComponent type)", Logger::MessageType::Error, Logger::Output::All);
 
 				return nullptr;
 			}
 
-			for (auto & var : m_components)
-				if (T *eptr = dynamic_cast<T*>(var.get()))
-				{
-					Logger::Log("Entity '" + m_name + "' (" + std::to_string(m_id) + "): Failed to add component, found same component. Remove old one before adding new one", Logger::MessageType::Error, Logger::Output::All);
+			if (std::is_same<DrawableComponent, T>())
+			{
+				Logger::Log("Entity '" + m_name + "' (" + std::to_string(m_id) + "): Failed to add component, trying to add not inherited Component (T is DrawableComponent type)", Logger::MessageType::Error, Logger::Output::All);
 
-					return nullptr;
-				}
+				return nullptr;
+			}
 
-			/*
-			If you are here, probably you have just tried to add a component which
-			is not a child of Component class
-			*/
-			m_components.push_back(std::make_unique<T>());
-			// ^ !!! ^
+			if (std::is_same<UpdateabaleComponent, T>())
+			{
+				Logger::Log("Entity '" + m_name + "' (" + std::to_string(m_id) + "): Failed to add component, trying to add not inherited UpdateableComponent (T is DrawableComponent type)", Logger::MessageType::Error, Logger::Output::All);
 
-			m_components[m_components.size() - 1]->onCreate();
-			m_components[m_components.size() - 1]->m_entityAttachedTo = this;
+				return nullptr;
+			}
 
-			return dynamic_cast<T*>(m_components[m_components.size() - 1].get());
+			if (std::is_base_of<Component, T>())
+			{
+				for (auto & var : m_components)
+					if (T *ptr = dynamic_cast<T*>(var.get()))
+					{
+						Logger::Log("Entity '" + m_name + "' (" + std::to_string(m_id) + "): Failed to add component, found same Component. Remove old one before adding new one", Logger::MessageType::Error, Logger::Output::All);
+
+						return nullptr;
+					}
+				
+				m_components.push_back(std::make_unique<T>());
+
+				m_components.back()->BasicComponent::onCreate();
+				m_components.back()->BasicComponent::m_entityAttachedTo = this;
+
+				return dynamic_cast<T*>(m_components.back().get());
+			}
+
+			if (std::is_base_of<DrawableComponent, T>())
+			{
+				for (auto & var : m_components)
+					if (T *ptr = dynamic_cast<T*>(var.get()))
+					{
+						Logger::Log("Entity '" + m_name + "' (" + std::to_string(m_id) + "): Failed to add component, found same DrawableComponent. Remove old one before adding new one", Logger::MessageType::Error, Logger::Output::All);
+
+						return nullptr;
+					}
+
+				m_drawable.push_back(std::make_shared<T>());
+
+				m_drawable.back()->BasicComponent::onCreate();
+				m_drawable.back()->m_entityAttachedTo = this;
+
+				return dynamic_cast<T*>(m_drawable.back().get());
+			}
+
+			if (std::is_base_of<UpdateabaleComponent, T>())
+			{
+				for (auto & var : m_components)
+					if (T *ptr = dynamic_cast<T*>(var.get()))
+					{
+						Logger::Log("Entity '" + m_name + "' (" + std::to_string(m_id) + "): Failed to add component, found same UpdateableComponent. Remove old one before adding new one", Logger::MessageType::Error, Logger::Output::All);
+
+						return nullptr;
+					}
+
+				m_updatable.push_back(std::make_shared<T>());
+
+				m_updatable.back()->BasicComponent::onCreate();
+				m_updatable.back()->m_entityAttachedTo = this;
+
+				return dynamic_cast<T*>(m_updatable.back().get());
+			}
+
+			if (std::is_base_of<BasicComponent, T>())
+			{
+				for (auto & var : m_components)
+					if (T *ptr = dynamic_cast<T*>(var.get()))
+					{
+						Logger::Log("Entity '" + m_name + "' (" + std::to_string(m_id) + "): Failed to add component, found same BasicComponent. Remove old one before adding new one", Logger::MessageType::Error, Logger::Output::All);
+
+						return nullptr;
+					}
+
+				m_basic.push_back(std::make_shared<T>());
+
+				m_basic.back()->onCreate();
+				m_basic.back()->m_entityAttachedTo = this;
+
+				return dynamic_cast<T*>(m_basic.back().get());
+			}
+
+			Logger::Log("Entity '" + m_name + "' (" + std::to_string(m_id) + "): Failed to add component, T is not a child of any Component related class", Logger::MessageType::Error, Logger::Output::All);
+		
+			return nullptr;
 		}
 
 		// Returns pointer to component or nullptr if failed (see debug log)
@@ -105,20 +177,66 @@ namespace ce
 			if (std::is_same<Component, T>())
 			{
 				Logger::Log("Entity '" + m_name + "' (" + std::to_string(m_id) + "): Failed to get component, trying to get not inherited Component (T is Component type)", Logger::MessageType::Error, Logger::Output::All);
-			}
-		
-			if (!std::is_base_of<Component, T>())
-			{
-				Logger::Log("Entity '" + m_name +"' (" + std::to_string(m_id) + "): Failed to get component, 'Component' is not base of 'T'", Logger::MessageType::Error, Logger::Output::All);
 
 				return nullptr;
 			}
 
-			for (auto & c : m_components)
-				if (T *eptr = dynamic_cast<T*>(c.get()))
-				{
-					return dynamic_cast<T*>(c.get());
-				}
+			if (std::is_same<BasicComponent, T>())
+			{
+				Logger::Log("Entity '" + m_name + "' (" + std::to_string(m_id) + "): Failed to get component, trying to get not inherited Component (T is BasicComponent type)", Logger::MessageType::Error, Logger::Output::All);
+
+				return nullptr;
+			}
+
+			if (std::is_same<DrawableComponent, T>())
+			{
+				Logger::Log("Entity '" + m_name + "' (" + std::to_string(m_id) + "): Failed to get component, trying to get not inherited Component (T is DrawableComponent type)", Logger::MessageType::Error, Logger::Output::All);
+
+				return nullptr;
+			}
+
+			if (std::is_same<UpdateabaleComponent, T>())
+			{
+				Logger::Log("Entity '" + m_name + "' (" + std::to_string(m_id) + "): Failed to get component, trying to get not inherited UpdateableComponent (T is DrawableComponent type)", Logger::MessageType::Error, Logger::Output::All);
+
+				return nullptr;
+			}
+
+			if (std::is_base_of<Component, T>())
+			{
+				for (auto & c : m_components)
+					if (T *eptr = dynamic_cast<T*>(c.get()))
+					{
+						return dynamic_cast<T*>(c.get());
+					}
+			}
+
+			if (std::is_base_of<UpdateabaleComponent, T>())
+			{
+				for (auto & c : m_updatable)
+					if (T *eptr = dynamic_cast<T*>(c.get()))
+					{
+						return dynamic_cast<T*>(c.get());
+					}
+			}
+
+			if (std::is_base_of<DrawableComponent, T>())
+			{
+				for (auto & c : m_drawable)
+					if (T *eptr = dynamic_cast<T*>(c.get()))
+					{
+						return dynamic_cast<T*>(c.get());
+					}
+			}
+
+			if (std::is_base_of<BasicComponent, T>())
+			{
+				for (auto & c : m_basic)
+					if (T *eptr = dynamic_cast<T*>(c.get()))
+					{
+						return dynamic_cast<T*>(c.get());
+					}
+			}
 
 			Logger::Log("Entity '" + m_name + "' (" + std::to_string(m_id) + "): Failed to get component, cannot find", Logger::MessageType::Error, Logger::Output::All);
 
@@ -179,7 +297,10 @@ namespace ce
 		}
 
 	private:
-		std::vector< std::shared_ptr<ce::Component> > m_components;
+		std::vector< std::shared_ptr< ce::Component > > m_components;
+		std::vector< std::shared_ptr< ce::BasicComponent > > m_basic;
+		std::vector< std::shared_ptr< ce::UpdateabaleComponent > > m_updatable;
+		std::vector< std::shared_ptr< ce::DrawableComponent > > m_drawable;
 		sf::Vector2f m_position;
 		std::string m_name;
 		unsigned int m_id;
