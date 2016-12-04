@@ -41,10 +41,11 @@ ce::Entity * ce::EntityHolder::GetEntity(unsigned int id)
 
 ce::Entity * ce::EntityHolder::AddEntity()
 {
-	m_entities.resize(m_entities.size() + 1);
-	m_entities[m_entities.size() - 1].m_holderAttachedTo = this;
+	m_entities.push_back(ce::Entity());
 
-	return &m_entities[m_entities.size() - 1];
+	m_entities.back().m_holderAttachedTo = this;
+
+	return &m_entities.back();
 }
 
 bool ce::EntityHolder::RemoveEntity(const std::string & name)

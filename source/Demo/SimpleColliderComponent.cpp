@@ -2,8 +2,8 @@
 
 void demo::SimpleCollider::update(float deltaTime)
 {
-	m_bounds.left += this->GetEntityAttachedTo()->GetPosition().x + m_localPosition.x;
-	m_bounds.top += this->GetEntityAttachedTo()->GetPosition().y + m_localPosition.y;
+	m_bounds.left += this->m_entityAttachedTo->GetPosition().x + m_localPosition.x;
+	m_bounds.top += this->m_entityAttachedTo->GetPosition().y + m_localPosition.y;
 }
 
 demo::SimpleCollider::SimpleCollider()

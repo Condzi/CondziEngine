@@ -6,12 +6,16 @@ void ce::Entity::draw(sf::RenderTarget & target, sf::RenderStates states) const
 		target.draw(*c, states);
 }
 
+unsigned int ce::Entity::makeID()
+{
+	static unsigned int counter = 0;
+	return ++counter;
+}
+
 
 ce::Entity::Entity()
 {
-	static unsigned int counter = 0;
-
-	m_id = ++counter;
+	m_id = makeID();
 	m_name = "(Unnamed)";
 	m_position = sf::Vector2f(0, 0);
 	m_isSleeping = false;
@@ -20,11 +24,11 @@ ce::Entity::Entity()
 
 ce::Entity::~Entity()
 {
-	for (auto * c : m_components)
+	this;
+
+	for (auto & c : m_components)
 	{
 		c->onDelete();
-
-		delete c;
 	}
 }
 
@@ -49,14 +53,6 @@ void ce::Entity::Update(float frameTime)
 
 void ce::Entity::RemoveAllComponents()
 {
-	for (auto * c : m_components)
-	{
-		// reason why onDelete is not calling here is 
-		// Entity is not deleting but component, and onDelete is called
-		// only when Entity is deleting
-		delete c;
-	}
-
 	m_components.clear();
 }
 
@@ -120,4 +116,3 @@ void ce::Entity::Sleep()
 	for (auto & c : m_components)
 		c->onSleep();
 }
-

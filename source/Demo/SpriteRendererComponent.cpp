@@ -7,7 +7,7 @@ void demo::SpriteRenderer::draw(sf::RenderTarget & target, sf::RenderStates stat
 
 void demo::SpriteRenderer::update(float)
 {
-	m_sprite.setPosition(this->GetEntityAttachedTo()->GetPositionRef() + m_localPosition);
+	m_sprite.setPosition(this->m_entityAttachedTo->GetPositionRef() + m_localPosition);
 }
 
 demo::SpriteRenderer::SpriteRenderer()
@@ -19,7 +19,7 @@ void demo::SpriteRenderer::SetTexture(const sf::Texture * texture)
 {
 	if (texture == nullptr)
 	{
-		ce::Logger::Log("SpriteRenderer [" + std::to_string(this->GetEntityAttachedTo()->GetID()) + "]: Texture is nullptr", ce::Logger::MessageType::Error, ce::Logger::Output::All);
+		ce::Logger::Log("SpriteRenderer [" + std::to_string(this->m_entityAttachedTo->GetID()) + "]: Texture is nullptr", ce::Logger::MessageType::Error, ce::Logger::Output::All);
 		
 		return;
 	}

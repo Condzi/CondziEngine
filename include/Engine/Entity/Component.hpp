@@ -35,7 +35,7 @@ namespace ce
 		// Returns entity that component is attached to
 		Entity * GetEntityAttachedTo();
 
-	private:
+	protected:
 		Entity * m_entityAttachedTo;
 
 	};

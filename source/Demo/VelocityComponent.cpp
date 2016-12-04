@@ -2,7 +2,7 @@
 
 void demo::Velocity::update(float deltaTime)
 {
-	this->GetEntityAttachedTo()->GetPositionRef() += m_velocity * deltaTime;
+	this->m_entityAttachedTo->GetPositionRef() += m_velocity * deltaTime;
 }
 
 demo::Velocity::Velocity()

@@ -2,7 +2,8 @@
 
 void demo::PlayState::onActivation()
 {
-	EntityFactory::MakeBackground(m_entityHolder.AddEntity());
+	EntityFactory::MakeBackground(m_entityHolder.AddEntity())->SetName("Background");
+	EntityFactory::MakeCar(m_entityHolder.AddEntity())->SetName("Player");
 }
 
 void demo::PlayState::onDeactivation()

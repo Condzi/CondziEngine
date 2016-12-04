@@ -11,7 +11,7 @@ void demo::PlayerController::update(float deltaTime)
 		force.x = m_movementForce.x;
 
 
-	this->GetEntityAttachedTo()->GetPositionRef() += force * deltaTime;
+	this->m_entityAttachedTo->GetPositionRef() += force * deltaTime;
 }
 
 demo::PlayerController::PlayerController()

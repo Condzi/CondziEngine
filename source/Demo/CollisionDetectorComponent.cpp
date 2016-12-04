@@ -3,7 +3,7 @@
 void demo::CollisionDetector::update(float deltaTime)
 {
 	std::vector<ce::Entity*> simulators;
-	ce::EntityHolder& entityHolder = *this->GetEntityAttachedTo()->GetEntityHolderAttachedTo();
+	ce::EntityHolder& entityHolder = *this->m_entityAttachedTo->GetEntityHolderAttachedTo();
 	ce::Entity* tempEntity = nullptr;
 	sf::FloatRect rectA;
 	sf::FloatRect rectB;
