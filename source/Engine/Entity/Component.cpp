@@ -29,7 +29,7 @@ ce::Component::Component()
 	m_entityAttachedTo = nullptr;
 }
 
-ce::Entity & ce::Component::GetEntityAttachedTo()
+ce::Entity * ce::Component::GetEntityAttachedTo()
 {
-	return *m_entityAttachedTo;
+	return m_entityAttachedTo;
 }

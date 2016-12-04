@@ -27,28 +27,23 @@ namespace ce
 		// If configPath = "" then nothing is trying to load.
 		ResourceCache(const std::string & configFilePath);
 
-		// Returns const reference to sf::Texture
+		// Returns pointer to sf::Texture
 		// key	- texture name
-		const sf::Texture & GetTexture(const std::string & key);
-		// Returns const reference to sf::Font
+		sf::Texture * GetTexture(const std::string & key);
+		// Returns pointer to sf::Font
 		// key	- font name
-		const sf::Font & GetFont(const std::string & key);
-		// Returns const reference to sf::SoundBuffer
+		sf::Font * GetFont(const std::string & key);
+		// Returns pointer to sf::SoundBuffer
 		// key	- sound buffer name
-		const sf::SoundBuffer & GetSoundBuffer(const std::string & key);
-		// Returns reference to sf::Music, please be carefoul with editing it.
+		sf::SoundBuffer * GetSoundBuffer(const std::string & key);
+		// Returns pointer to sf::Music.
 		// key	- music name
-		sf::Music & GetMusic(const std::string & key);
+		sf::Music * GetMusic(const std::string & key);
 
 	private:
 		std::map< std::string, sf::Texture > m_textures;
 		std::map< std::string, sf::Font > m_fonts;
 		std::map< std::string, sf::SoundBuffer > m_soundBuffers;
 		std::map< std::string, sf::Music > m_music;
-
-		sf::Texture m_templateTexture;
-		sf::Font m_templateFont;
-		sf::SoundBuffer m_templateSoundBuffer;
-		sf::Music m_templateMusic;
 	};
 }

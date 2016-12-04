@@ -18,8 +18,8 @@ namespace ce
 		friend class StateMachine;
 
 	private:
-		void onActivation();
-		void onDeactivation();
+		virtual void onActivation();
+		virtual void onDeactivation();
 
 	public:
 		// State constructor (not default)

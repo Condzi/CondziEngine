@@ -54,7 +54,7 @@ inline bool ce::CustomResourceCache<T>::load(const std::string & configFilePath)
 	return true;
 }
 
-template< class T >
+template<class T>
 inline ce::CustomResourceCache<T>::CustomResourceCache(const std::string & cfgFile, const std::string & tag)
 {
 	m_configFile = cfgFile;

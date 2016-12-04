@@ -6,24 +6,29 @@ void ce::Entity::draw(sf::RenderTarget & target, sf::RenderStates states) const
 		target.draw(*c, states);
 }
 
+unsigned int ce::Entity::makeID()
+{
+	static unsigned int counter = 0;
+	return ++counter;
+}
+
 
 ce::Entity::Entity()
 {
-	static unsigned int counter = 0;
-
-	m_id = ++counter;
+	m_id = makeID();
 	m_name = "(Unnamed)";
 	m_position = sf::Vector2f(0, 0);
 	m_isSleeping = false;
+	m_holderAttachedTo = nullptr;
 }
 
 ce::Entity::~Entity()
 {
-	for (auto * c : m_components)
+	this;
+
+	for (auto & c : m_components)
 	{
 		c->onDelete();
-
-		delete c;
 	}
 }
 
@@ -44,6 +49,11 @@ void ce::Entity::Update(float frameTime)
 
 	for (auto & c : m_components)
 		c->update(frameTime);
+}
+
+void ce::Entity::RemoveAllComponents()
+{
+	m_components.clear();
 }
 
 void ce::Entity::SetName(const std::string & name)
@@ -69,6 +79,11 @@ std::string ce::Entity::GetName()
 unsigned int ce::Entity::GetID()
 {
 	return m_id;
+}
+
+ce::EntityHolder * ce::Entity::GetEntityHolderAttachedTo()
+{
+	return m_holderAttachedTo;
 }
 
 bool ce::Entity::IsSleeping()
@@ -101,4 +116,3 @@ void ce::Entity::Sleep()
 	for (auto & c : m_components)
 		c->onSleep();
 }
-

@@ -3,6 +3,7 @@
 #include "Engine/Logger/Logger.hpp"
 #include <vector>
 #include <typeinfo>
+#include <memory>
 
 namespace ce
 {
@@ -17,6 +18,7 @@ namespace ce
 
 	private:
 		void draw(sf::RenderTarget & target, sf::RenderStates states) const;
+		static unsigned int makeID();
 
 	public:
 		// Entity class constructor (default)
@@ -31,6 +33,8 @@ namespace ce
 		std::string GetName();
 		// Returns unique ID of entity
 		unsigned int GetID();
+		// Returns Entity Holder that entity is attached
+		EntityHolder* GetEntityHolderAttachedTo();
 		// Returns true if sleeping
 		bool IsSleeping();
 		// Invokes Entity if sleeps
@@ -50,13 +54,15 @@ namespace ce
 		// frameTime - frame time or delta time
 		// If you want to draw it, simply use it like other SFML drawable
 		void Update(float frameTime);
+		// Removes all components
+		void RemoveAllComponents();
 
 
 		// Adds component to entity
 		// Returns pointer to component or nullptr if failed (see debug log)
 		// Usasge: entity.AddComponent<AwesomeComponent>()->setAwesomeThing(1);
 		template<class T>
-		T* Entity::AddComponent()
+		T* AddComponent()
 		{
 			if (std::is_same<Component, T>())
 			{
@@ -71,7 +77,7 @@ namespace ce
 			}
 
 			for (auto & var : m_components)
-				if (T *eptr = dynamic_cast<T*>(var))
+				if (T *eptr = dynamic_cast<T*>(var.get()))
 				{
 					Logger::Log("Entity '" + m_name + "' (" + std::to_string(m_id) + "): Failed to add component, found same component. Remove old one before adding new one", Logger::MessageType::Error, Logger::Output::All);
 
@@ -82,19 +88,19 @@ namespace ce
 			If you are here, probably you have just tried to add a component which
 			is not a child of Component class
 			*/
-			m_components.push_back((new T()));
+			m_components.push_back(std::make_unique<T>());
 			// ^ !!! ^
 
 			m_components[m_components.size() - 1]->onCreate();
 			m_components[m_components.size() - 1]->m_entityAttachedTo = this;
 
-			return dynamic_cast<T*>(m_components[m_components.size() - 1]);
+			return dynamic_cast<T*>(m_components[m_components.size() - 1].get());
 		}
 
 		// Returns pointer to component or nullptr if failed (see debug log)
 		// Usasge: entity.GetComponent<AwesomeComponent>()->setAwesomeThing(1);
 		template<class T>
-		T* Entity::GetComponent()
+		T* GetComponent()
 		{
 			if (std::is_same<Component, T>())
 			{
@@ -109,9 +115,9 @@ namespace ce
 			}
 
 			for (auto & c : m_components)
-				if (T *eptr = dynamic_cast<T*>(c))
+				if (T *eptr = dynamic_cast<T*>(c.get()))
 				{
-					return dynamic_cast<T*>(c);
+					return dynamic_cast<T*>(c.get());
 				}
 
 			Logger::Log("Entity '" + m_name + "' (" + std::to_string(m_id) + "): Failed to get component, cannot find", Logger::MessageType::Error, Logger::Output::All);
@@ -123,7 +129,7 @@ namespace ce
 		// Returns false if failed (see debug log)
 		// Usage: entity.RemoveComponent<AwesomeComponent>()
 		template<class T>
-		bool Entity::RemoveComponent()
+		bool RemoveComponent()
 		{
 			if (std::is_same<Component, T>())
 			{
@@ -138,7 +144,7 @@ namespace ce
 			}
 
 			for (auto itr = m_components.begin(); itr != m_components.end(); ++itr)
-				if (T *eptr = dynamic_cast<T*>(*itr))
+				if (T *eptr = dynamic_cast<T*>(*itr->get()))
 				{
 					delete *itr;
 					m_components.erase(itr);
@@ -164,7 +170,7 @@ namespace ce
 			}
 
 			for (auto & c : m_components)
-				if (T *eptr = dynamic_cast<T*>(c))
+				if (T *eptr = dynamic_cast<T*>(c.get()))
 				{
 					return true;
 				}
@@ -172,13 +178,14 @@ namespace ce
 			return false;
 		}
 
-
 	private:
-		std::vector< ce::Component* > m_components;
+		std::vector< std::shared_ptr<ce::Component> > m_components;
 		sf::Vector2f m_position;
 		std::string m_name;
 		unsigned int m_id;
 		bool m_isSleeping;
+
+		EntityHolder * m_holderAttachedTo;
 
 	};
 }
