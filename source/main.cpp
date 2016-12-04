@@ -8,7 +8,7 @@ int main()
 
 	ce::Game game(sf::Vector2u(1280, 720), "Conine Demo", 60);
 
-	game.AddState<demo::PlayState>((int)demo::State::Play, "");
+	game.AddState<demo::PlayState>((int)demo::State::Play, "data/PLAY.config");
 	game.Run();
 
 	return 0;

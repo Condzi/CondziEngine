@@ -1,7 +1,18 @@
 #include "Demo/PlayState.hpp"
 
+void demo::PlayState::onActivation()
+{
+	EntityFactory::MakeBackground(m_entityHolder.AddEntity());
+}
+
+void demo::PlayState::onDeactivation()
+{
+	m_entityHolder.RemoveAll();
+}
+
 demo::PlayState::PlayState(const std::string & resourceCachePath) :State(resourceCachePath)
 {
+	EntityFactory::SetResourceCachePointer(m_resourceCache);
 }
 
 short demo::PlayState::Run()

@@ -240,62 +240,62 @@ ce::ResourceCache::ResourceCache(const std::string & configFilePath)
 	loadMusic(cfg.GetData("MUSIC"));
 }
 
-const sf::Texture & ce::ResourceCache::GetTexture(const std::string & key)
+sf::Texture * ce::ResourceCache::GetTexture(const std::string & key)
 {
 	for (auto it = m_textures.begin(); it != m_textures.end(); ++it)
 	{
 		if (it->first == key)
 		{
-			return m_textures[key];
+			return &m_textures[key];
 		}
 	}
 
 	Logger::Log("ResourceCache: Cannot -get (find)- texture " + key + "!", Logger::MessageType::Warning, Logger::Output::All);
 	
-	return m_templateTexture;
+	return nullptr;
 }
 
-const sf::Font & ce::ResourceCache::GetFont(const std::string & key)
+sf::Font * ce::ResourceCache::GetFont(const std::string & key)
 {
 	for (auto it = m_fonts.begin(); it != m_fonts.end(); ++it)
 	{
 		if (it->first == key)
 		{
-			return m_fonts[key];
+			return &m_fonts[key];
 		}
 	}
 
 	Logger::Log("ResourceCache: Cannot -get (find)- font " + key + "!", Logger::MessageType::Warning, Logger::Output::All);
 	
-	return m_templateFont;
+	return nullptr;
 }
 
-const sf::SoundBuffer & ce::ResourceCache::GetSoundBuffer(const std::string & key)
+sf::SoundBuffer * ce::ResourceCache::GetSoundBuffer(const std::string & key)
 {
 	for (auto it = m_soundBuffers.begin(); it != m_soundBuffers.end(); ++it)
 	{
 		if (it->first == key)
 		{
-			return m_soundBuffers[key];
+			return &m_soundBuffers[key];
 		}
 	}
 
 	Logger::Log("ResourceCache: Cannot -get (find)- sound buffer " + key + "!", Logger::MessageType::Warning, Logger::Output::All);
 	
-	return m_templateSoundBuffer;
+	return nullptr;
 }
 
-sf::Music & ce::ResourceCache::GetMusic(const std::string & key)
+sf::Music * ce::ResourceCache::GetMusic(const std::string & key)
 {
 	for (auto it = m_music.begin(); it != m_music.end(); ++it)
 	{
 		if (it->first == key)
 		{
-			return m_music[key];
+			return &m_music[key];
 		}
 	}
 
 	Logger::Log("ResourceCache: Cannot -get (find)- music " + key + "!", Logger::MessageType::Warning, Logger::Output::All);
 
-	return m_templateMusic;
+	return nullptr;
 }

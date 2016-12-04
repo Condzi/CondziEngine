@@ -5,7 +5,7 @@ ce::Entity * demo::EntityFactory::MakeCar(ce::Entity * entity)
 	entity->RemoveAllComponents();
 
 	entity->AddComponent< PlayerController >()->SetMovementForce(sf::Vector2f(100, 0));
-	entity->AddComponent< SpriteRenderer >()->SetTexture(&internal::ResourceCachePtr->GetTexture("Player"));
+	entity->AddComponent< SpriteRenderer >()->SetTexture(internal::ResourceCachePtr->GetTexture("Player"));
 	entity->AddComponent< SimpleCollider >()->SetRect(entity->GetComponent< SpriteRenderer >()->GetRect());
 
 	return entity;
@@ -15,7 +15,7 @@ ce::Entity * demo::EntityFactory::MakeObstacle(ce::Entity * entity)
 {
 	entity->RemoveAllComponents();
 
-	entity->AddComponent< SpriteRenderer >()->SetTexture(&internal::ResourceCachePtr->GetTexture("Obstacle"));
+	entity->AddComponent< SpriteRenderer >()->SetTexture(internal::ResourceCachePtr->GetTexture("Obstacle"));
 	entity->AddComponent< SimpleCollider >()->SetRect(entity->GetComponent< SpriteRenderer >()->GetRect());
 	entity->AddComponent< Velocity >()->SetVelocity(sf::Vector2f(-100, 0));
 
@@ -26,8 +26,17 @@ ce::Entity * demo::EntityFactory::MakeTerrain(ce::Entity * entity)
 {
 	entity->RemoveAllComponents();
 
-	entity->AddComponent< SpriteRenderer >()->SetTexture(&internal::ResourceCachePtr->GetTexture("Background"));
+	entity->AddComponent< SpriteRenderer >()->SetTexture(internal::ResourceCachePtr->GetTexture("Terrain"));
 	
+	return entity;
+}
+
+ce::Entity * demo::EntityFactory::MakeBackground(ce::Entity * entity)
+{
+	entity->RemoveAllComponents();
+
+	entity->AddComponent< SpriteRenderer >()->SetTexture(internal::ResourceCachePtr->GetTexture("Background"));
+
 	return entity;
 }
 

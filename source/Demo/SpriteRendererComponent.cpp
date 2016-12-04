@@ -17,7 +17,7 @@ demo::SpriteRenderer::SpriteRenderer()
 
 void demo::SpriteRenderer::SetTexture(const sf::Texture * texture)
 {
-	if (texture)
+	if (texture == nullptr)
 	{
 		ce::Logger::Log("SpriteRenderer [" + std::to_string(this->GetEntityAttachedTo()->GetID()) + "]: Texture is nullptr", ce::Logger::MessageType::Error, ce::Logger::Output::All);
 		
