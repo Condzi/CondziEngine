@@ -42,6 +42,14 @@ ce::UpdateabaleComponent::UpdateabaleComponent()
 {
 }
 
+void ce::Component::update(float)
+{
+}
+
+void ce::Component::draw(sf::RenderTarget &, sf::RenderStates) const
+{
+}
+
 ce::Component::Component()
 {
 }

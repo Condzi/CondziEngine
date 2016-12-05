@@ -104,8 +104,8 @@ namespace ce
 				
 				m_components.push_back(std::make_unique<T>());
 
-				m_components.back()->BasicComponent::onCreate();
-				m_components.back()->BasicComponent::m_entityAttachedTo = this;
+				m_components.back()->onCreate();
+				m_components.back()->m_entityAttachedTo = this;
 
 				return dynamic_cast<T*>(m_components.back().get());
 			}
@@ -122,7 +122,7 @@ namespace ce
 
 				m_drawable.push_back(std::make_shared<T>());
 
-				m_drawable.back()->BasicComponent::onCreate();
+				m_drawable.back()->onCreate();
 				m_drawable.back()->m_entityAttachedTo = this;
 
 				return dynamic_cast<T*>(m_drawable.back().get());
@@ -140,7 +140,7 @@ namespace ce
 
 				m_updatable.push_back(std::make_shared<T>());
 
-				m_updatable.back()->BasicComponent::onCreate();
+				m_updatable.back()->onCreate();
 				m_updatable.back()->m_entityAttachedTo = this;
 
 				return dynamic_cast<T*>(m_updatable.back().get());

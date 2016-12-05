@@ -28,7 +28,7 @@ namespace ce
 
 		ce::Entity * GetEntityAttachedTo();
 
-	private:
+	protected:
 		ce::Entity * m_entityAttachedTo;
 
 	};
@@ -88,11 +88,15 @@ namespace ce
 	// void onDelete()
 	// void onSleep()
 	// void onInvoke()
-	class Component :
-		public ce::DrawableComponent,
-		public ce::UpdateabaleComponent
+	class Component : 
+		public ce::BasicComponent,
+		public sf::Drawable
 	{
 		friend class Entity;
+
+	private:
+		virtual void update(float);
+		virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
 
 	public:
 		Component();
