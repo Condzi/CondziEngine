@@ -2,6 +2,9 @@
 
 void ce::Entity::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
+	for (auto & d : m_drawable)
+		target.draw(*d, states);
+
 	for (auto & c : m_components)
 		target.draw(*c, states);
 }
@@ -24,12 +27,17 @@ ce::Entity::Entity()
 
 ce::Entity::~Entity()
 {
-	this;
-
 	for (auto & c : m_components)
-	{
-		c->onDelete();
-	}
+		c->BasicComponent::onDelete();
+
+	for (auto & b : m_basic)
+		b->onDelete();
+
+	for (auto & u : m_updatable)
+		u->onDelete();
+
+	for (auto & d : m_drawable)
+		d->onDelete();
 }
 
 sf::Vector2f ce::Entity::GetPosition()
@@ -47,6 +55,9 @@ void ce::Entity::Update(float frameTime)
 	if (m_isSleeping)
 		return;
 
+	for (auto & u : m_updatable)
+		u->update(frameTime);
+
 	for (auto & c : m_components)
 		c->update(frameTime);
 }
@@ -54,6 +65,9 @@ void ce::Entity::Update(float frameTime)
 void ce::Entity::RemoveAllComponents()
 {
 	m_components.clear();
+	m_basic.clear();
+	m_updatable.clear();
+	m_drawable.clear();
 }
 
 void ce::Entity::SetName(const std::string & name)
@@ -101,7 +115,16 @@ void ce::Entity::Invoke()
 	}
 
 	for (auto & c : m_components)
-		c->onInvoke();
+		c->BasicComponent::onInvoke();
+
+	for (auto & b : m_basic)
+		b->onInvoke();
+
+	for (auto & u : m_updatable)
+		u->onInvoke();
+
+	for (auto & d : m_drawable)
+		d->onInvoke();
 }
 
 void ce::Entity::Sleep()
@@ -114,5 +137,14 @@ void ce::Entity::Sleep()
 	}
 
 	for (auto & c : m_components)
-		c->onSleep();
+		c->BasicComponent::onSleep();
+
+	for (auto & b : m_basic)
+		b->onSleep();
+
+	for (auto & u : m_updatable)
+		u->onSleep();
+
+	for (auto & d : m_drawable)
+		d->onSleep();
 }
